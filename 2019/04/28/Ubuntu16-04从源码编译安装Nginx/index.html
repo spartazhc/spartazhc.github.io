@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="linux,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Ubuntu16.04 Compile Nginx &amp;amp; nginx-rtmp-module From Source之前是通过apt安装的nginx1.14.2，方便好用，但是因为作业ppt中展示了rtmp stat.xsl文件的数据统计功能，我在本机sudo find / &amp;#39;stat.xsl&amp;#39;没有找到这个文件，因此才决定重新编译安装nginx。（事实上，当我安装完之后我才意">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu16-04从源码编译安装Nginx">
+<meta property="og:url" content="http://spartazhc.xyz/2019/04/28/Ubuntu16-04从源码编译安装Nginx/index.html">
+<meta property="og:site_name" content="spartazhc&#39;s blog">
+<meta property="og:description" content="Ubuntu16.04 Compile Nginx &amp;amp; nginx-rtmp-module From Source之前是通过apt安装的nginx1.14.2，方便好用，但是因为作业ppt中展示了rtmp stat.xsl文件的数据统计功能，我在本机sudo find / &amp;#39;stat.xsl&amp;#39;没有找到这个文件，因此才决定重新编译安装nginx。（事实上，当我安装完之后我才意">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-29T02:38:43.324Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ubuntu16-04从源码编译安装Nginx">
+<meta name="twitter:description" content="Ubuntu16.04 Compile Nginx &amp;amp; nginx-rtmp-module From Source之前是通过apt安装的nginx1.14.2，方便好用，但是因为作业ppt中展示了rtmp stat.xsl文件的数据统计功能，我在本机sudo find / &amp;#39;stat.xsl&amp;#39;没有找到这个文件，因此才决定重新编译安装nginx。（事实上，当我安装完之后我才意">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://spartazhc.xyz/2019/04/28/Ubuntu16-04从源码编译安装Nginx/">
+
+
+
+
+
+  <title>Ubuntu16-04从源码编译安装Nginx | spartazhc's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">spartazhc's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://spartazhc.xyz/2019/04/28/Ubuntu16-04从源码编译安装Nginx/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="spartazhc">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spartazhc's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Ubuntu16-04从源码编译安装Nginx</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-28T16:38:57+08:00">
+                2019-04-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Ubuntu16-04-Compile-Nginx-amp-nginx-rtmp-module-From-Source"><a href="#Ubuntu16-04-Compile-Nginx-amp-nginx-rtmp-module-From-Source" class="headerlink" title="Ubuntu16.04 Compile Nginx &amp; nginx-rtmp-module From Source"></a>Ubuntu16.04 Compile Nginx &amp; nginx-rtmp-module From Source</h2><p>之前是通过apt安装的nginx1.14.2，方便好用，但是因为作业ppt中展示了rtmp stat.xsl文件的数据统计功能，我在本机<code>sudo find / &#39;stat.xsl&#39;</code>没有找到这个文件，因此才决定重新编译安装nginx。（事实上，当我安装完之后我才意识到官方事例的意思是这个stat.xsl文件放在什么地方都可以，也就是说只要去github或者哪里随便下载一下这个文件就可以了，我完全是没事找事！！！）</p>
+<p>anyway，从源码编译安装nginx的过程如下：</p>
+<h3 id="创建nginx用户组以及用户"><a href="#创建nginx用户组以及用户" class="headerlink" title="创建nginx用户组以及用户"></a>创建nginx用户组以及用户</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo groupadd -r nginx</span><br><span class="line">sudo useradd -r -g nginx -s /bin/<span class="literal">false</span> -d /usr/<span class="built_in">local</span>/nginx -M nginx</span><br></pre></td></tr></table></figure>
+<h3 id="编译依赖"><a href="#编译依赖" class="headerlink" title="编译依赖"></a>编译依赖</h3><p>requirements:</p>
+<ul>
+<li><a href="https://www.openssl.org/" target="_blank" rel="noopener">OpenSSL</a> library version between 1.0.2 - 1.1.0</li>
+<li><a href="https://www.zlib.net/" target="_blank" rel="noopener">Zlib</a> library version between 1.1.3 - 1.2.11</li>
+<li><a href="http://www.pcre.org/" target="_blank" rel="noopener">PCRE</a> library version between 4.4 - 8.40</li>
+<li><a href="https://gcc.gnu.org/" target="_blank" rel="noopener">GCC</a> Compiler</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># PCRE version 4.4 - 8.42</span></span><br><span class="line">wget https://ftp.pcre.org/pub/pcre/pcre-8.42.tar.gz &amp;&amp; tar xzvf pcre-8.42.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># zlib version 1.1.3 - 1.2.11</span></span><br><span class="line">wget http://www.zlib.net/zlib-1.2.11.tar.gz &amp;&amp; tar xzvf zlib-1.2.11.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># OpenSSL version 1.0.2 - 1.1.1</span></span><br><span class="line">wget https://www.openssl.org/<span class="built_in">source</span>/openssl-1.1.1b.tar.gz &amp;&amp; tar xzvf openssl-1.1.1b.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># latest nginx</span></span><br><span class="line">wget https://nginx.org/download/nginx-1.16.0.tar.gz &amp;&amp; tar zxvf nginx-1.16.0.tar.gz</span><br></pre></td></tr></table></figure>
+<h3 id="编译安装"><a href="#编译安装" class="headerlink" title="编译安装"></a>编译安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=/usr/share/nginx \</span><br><span class="line">            --sbin-path=/usr/sbin/nginx \</span><br><span class="line">            --modules-path=/usr/lib/nginx/modules \</span><br><span class="line">            --conf-path=/etc/nginx/nginx.conf \</span><br><span class="line">            --error-log-path=/var/<span class="built_in">log</span>/nginx/error.log \</span><br><span class="line">            --http-log-path=/var/<span class="built_in">log</span>/nginx/access.log \</span><br><span class="line">            --pid-path=/run/nginx.pid \</span><br><span class="line">            --lock-path=/var/lock/nginx.lock \</span><br><span class="line">            --user=nginx \</span><br><span class="line">            --group=nginx \</span><br><span class="line">            --build=Ubuntu \</span><br><span class="line">            --http-client-body-temp-path=/var/lib/nginx/body \</span><br><span class="line">            --http-fastcgi-temp-path=/var/lib/nginx/fastcgi \</span><br><span class="line">            --http-proxy-temp-path=/var/lib/nginx/proxy \</span><br><span class="line">            --http-scgi-temp-path=/var/lib/nginx/scgi \</span><br><span class="line">            --http-uwsgi-temp-path=/var/lib/nginx/uwsgi \</span><br><span class="line">            --with-openssl=../openssl-1.1.1b \</span><br><span class="line">            --with-openssl-opt=<span class="built_in">enable</span>-ec_nistp_64_gcc_128 \</span><br><span class="line">            --with-openssl-opt=no-nextprotoneg \</span><br><span class="line">            --with-openssl-opt=no-weak-ssl-ciphers \</span><br><span class="line">            --with-openssl-opt=no-ssl3 \</span><br><span class="line">            --with-pcre=../pcre-8.42 \</span><br><span class="line">            --with-pcre-jit \</span><br><span class="line">            --with-zlib=../zlib-1.2.11 \</span><br><span class="line">            --with-compat \</span><br><span class="line">            --with-file-aio \</span><br><span class="line">            --with-threads \</span><br><span class="line">            --with-http_addition_module \</span><br><span class="line">            --with-http_auth_request_module \</span><br><span class="line">            --with-http_dav_module \</span><br><span class="line">            --with-http_flv_module \</span><br><span class="line">            --with-http_gunzip_module \</span><br><span class="line">            --with-http_gzip_static_module \</span><br><span class="line">            --with-http_mp4_module \</span><br><span class="line">            --with-http_random_index_module \</span><br><span class="line">            --with-http_realip_module \</span><br><span class="line">            --with-http_slice_module \</span><br><span class="line">            --with-http_ssl_module \</span><br><span class="line">            --with-http_sub_module \</span><br><span class="line">            --with-http_stub_status_module \</span><br><span class="line">            --with-http_v2_module \</span><br><span class="line">            --with-http_secure_link_module \</span><br><span class="line">            --with-mail \</span><br><span class="line">            --with-mail_ssl_module \</span><br><span class="line">            --with-stream \</span><br><span class="line">            --with-stream_realip_module \</span><br><span class="line">            --with-stream_ssl_module \</span><br><span class="line">            --with-stream_ssl_preread_module \</span><br><span class="line">            --with-debug \</span><br><span class="line">            --with-cc-opt=<span class="string">'-g -O2 -fPIE -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2'</span> \</span><br><span class="line">            --add-module=../nginx-rtmp-module </span><br><span class="line">make </span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<p>这里如果加上一条配置<code>--with-ld-opt=&#39;-Wl,-Bsymbolic-functions -fPIE -pie -Wl,-z,relro -Wl,-z,now&#39;</code>会出现一个error，尝试了好几次并不能解决，Google也搜索不到这个错误，于是把这行删掉了，编译可以通过。</p>
+<h3 id="检查安装"><a href="#检查安装" class="headerlink" title="检查安装"></a>检查安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo nginx -v &amp;&amp; sudo nginx -V</span><br><span class="line"><span class="comment"># return as following</span></span><br><span class="line">nginx version: nginx/1.16.0 (Ubuntu)</span><br><span class="line">built by gcc 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.11) </span><br><span class="line">built with OpenSSL 1.1.1b  26 Feb 2019</span><br><span class="line">TLS SNI support enabled</span><br><span class="line">configure arguments: --prefix=/usr/share/nginx --sbin-path=/usr/sbin/nginx --modules-path=/usr/lib/nginx/modules --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/<span class="built_in">log</span>/nginx/error.log --http-log-path=/var/<span class="built_in">log</span>/nginx/access.log --pid-path=/run/nginx.pid --lock-path=/var/lock/nginx.lock --user=nginx --group=nginx --build=Ubuntu --http-client-body-temp-path=/var/lib/nginx/body --http-fastcgi-temp-path=/var/lib/nginx/fastcgi --http-proxy-temp-path=/var/lib/nginx/proxy --http-scgi-temp-path=/var/lib/nginx/scgi --http-uwsgi-temp-path=/var/lib/nginx/uwsgi --with-openssl=../openssl-1.1.1b --with-openssl-opt=<span class="built_in">enable</span>-ec_nistp_64_gcc_128 --with-openssl-opt=no-nextprotoneg --with-openssl-opt=no-weak-ssl-ciphers --with-openssl-opt=no-ssl3 --with-pcre=../pcre-8.42 --with-pcre-jit --with-zlib=../zlib-1.2.11 --with-compat --with-file-aio --with-threads --with-http_addition_module --with-http_auth_request_module --with-http_dav_module --with-http_flv_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_mp4_module --with-http_random_index_module --with-http_realip_module --with-http_slice_module --with-http_ssl_module --with-http_sub_module --with-http_stub_status_module --with-http_v2_module --with-http_secure_link_module --with-mail --with-mail_ssl_module --with-stream --with-stream_realip_module --with-stream_ssl_module --with-stream_ssl_preread_module --with-debug --with-cc-opt=<span class="string">'-g -O2 -fPIE -fstack-protector-strong -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2'</span> --add-module=../nginx-rtmp-module</span><br></pre></td></tr></table></figure>
+<p>还需要下一步处理一个报错<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo nginx -t</span><br><span class="line"><span class="comment"># Will throw this error nginx: [emerg] mkdir() "/var/lib/nginx/body" failed (2: No such file or directory)</span></span><br><span class="line"><span class="comment"># Just create directory</span></span><br><span class="line">sudo mkdir -p /var/lib/nginx &amp;&amp; sudo nginx -t</span><br></pre></td></tr></table></figure></p>
+<h3 id="添加service"><a href="#添加service" class="headerlink" title="添加service"></a>添加service</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/systemd/system/nginx.service</span><br></pre></td></tr></table></figure>
+<p>把下面这段复制粘贴进去：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=A high performance web server and a reverse proxy server</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">PIDFile=/run/nginx.pid</span><br><span class="line">ExecStartPre=/usr/sbin/nginx -t -q -g <span class="string">'daemon on; master_process on;'</span></span><br><span class="line">ExecStart=/usr/sbin/nginx -g <span class="string">'daemon on; master_process on;'</span></span><br><span class="line">ExecReload=/usr/sbin/nginx -g <span class="string">'daemon on; master_process on;'</span> -s reload</span><br><span class="line">ExecStop=-/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /run/nginx.pid</span><br><span class="line">TimeoutStopSec=5</span><br><span class="line">KillMode=mixed</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+<h3 id="检查service状态"><a href="#检查service状态" class="headerlink" title="检查service状态"></a>检查service状态</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl status nginx</span><br></pre></td></tr></table></figure>
+<p>但是这里我做完之后报错没有nginx.service文件，纳闷了半天，然后其实<strong>重启就好了！</strong></p>
+<p>至此，nginx就编译安装好了，可以：</p>
+<ul>
+<li>访问localhost查看</li>
+<li><code>sudo vim /etc/nginx/nginx.conf</code>xiugai 配置文件</li>
+<li><code>sudo nginx -t</code>检查配置文件合法性</li>
+<li><code>sudo nginx -s reload</code>在不重启服务的情况下reload配置</li>
+</ul>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p><a href="https://www.vultr.com/docs/how-to-compile-nginx-from-source-on-ubuntu-16-04" target="_blank" rel="noopener">How to Compile Nginx From Source on Ubuntu 16.04</a></p>
+<p><a href="http://nginx.org/en/docs/configure.html" target="_blank" rel="noopener">Building nginx from Sources</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/29/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">spartazhc</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/spartazhc" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ubuntu16-04-Compile-Nginx-amp-nginx-rtmp-module-From-Source"><span class="nav-number">1.</span> <span class="nav-text">Ubuntu16.04 Compile Nginx &amp; nginx-rtmp-module From Source</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建nginx用户组以及用户"><span class="nav-number">1.1.</span> <span class="nav-text">创建nginx用户组以及用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译依赖"><span class="nav-number">1.2.</span> <span class="nav-text">编译依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译安装"><span class="nav-number">1.3.</span> <span class="nav-text">编译安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检查安装"><span class="nav-number">1.4.</span> <span class="nav-text">检查安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加service"><span class="nav-number">1.5.</span> <span class="nav-text">添加service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检查service状态"><span class="nav-number">1.6.</span> <span class="nav-text">检查service状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文献"><span class="nav-number">1.7.</span> <span class="nav-text">参考文献</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">spartazhc</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
