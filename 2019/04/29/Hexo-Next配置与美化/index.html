@@ -435,7 +435,9 @@
 
       
         <div class="note default"><p>参考各路教程对hexo的配置以及使用next的过程中的一些美化，包括添加评论(Valine)、文章浏览(LeanCloud)，以及一些杂七杂八的细节修改。</p></div>
+
 <a id="more"></a>
+
 <h2 id="功能实现"><a href="#功能实现" class="headerlink" title="功能实现"></a>功能实现</h2><ul>
 <li><p>文章浏览数：<a href="https://bjtu-hxs.github.io/2018/06/12/leancloud-config/" target="_blank" rel="noopener">Hexo博客Next主题添加统计文章阅读量功能</a></p>
 </li>
@@ -461,24 +463,40 @@
 </ul>
 <h2 id="一些很棒的格式"><a href="#一些很棒的格式" class="headerlink" title="一些很棒的格式"></a>一些很棒的格式</h2><p>一个俄罗斯老哥的博文讲的特别好：<a href="https://almostover.ru/2016-01/hexo-theme-next-test/" target="_blank" rel="noopener">Hexo Theme Next Test</a></p>
 <h3 id="Note标签"><a href="#Note标签" class="headerlink" title="Note标签"></a>Note标签</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;% note [class] [no-icon] %&#125;</span><br><span class="line">Any content (support inline tags too).</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line">[class] : default | primary | success | info | warning | danger.</span><br><span class="line">          May be not defined.</span><br></pre></td></tr></table></figure>
+
 <div class="note default"><p>default</p></div>
+
 <div class="note primary"><p>primary</p></div>
+
 <div class="note success"><p>success</p></div>
+
 <div class="note info"><p>info</p></div>
+
 <div class="note warning"><p>warning</p></div>
+
 <div class="note dangner"><p>danginer</p></div>
+
 <div class="note danger no-icon"><p>note without icon</p></div>
+
 <h3 id="Label标签"><a href="#Label标签" class="headerlink" title="Label标签"></a>Label标签</h3><p>这个我感觉我会懒得用诶。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% label [class]@content %&#125;</span><br><span class="line">[class] : default | primary | success | info | warning | danger.</span><br><span class="line">          May be not defined.</span><br></pre></td></tr></table></figure>
-<span class="label default">default</span>，<span class="label primary">primary</span>，<span class="label success">success</span>，<span class="label info">info</span>，<span class="label warning">warning</span>，<span class="label danger">danger</span>就是这个样子<br><br>### tab 选项卡<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;% tabs 选项卡, 2 %&#125;</span><br><span class="line">&lt;!-- tab --&gt;</span><br><span class="line">**这是选项卡 1** 呵呵哈哈哈哈哈哈</span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line">&lt;!-- tab --&gt;</span><br><span class="line">**这是选项卡 2** 被设置成默认了</span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line">&lt;!-- tab --&gt;</span><br><span class="line">**这是选项卡 3** 哇，你找到我了！</span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line">&#123;% endtabs %&#125;</span><br></pre></td></tr></table></figure>
+
+<span class="label default">default</span>，<span class="label primary">primary</span>，<span class="label success">success</span>，<span class="label info">info</span>，<span class="label warning">warning</span>，<span class="label danger">danger</span>就是这个样子
+
+<h3 id="tab-选项卡"><a href="#tab-选项卡" class="headerlink" title="tab 选项卡"></a>tab 选项卡</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;% tabs 选项卡, 2 %&#125;</span><br><span class="line">&lt;!-- tab --&gt;</span><br><span class="line">**这是选项卡 1** 呵呵哈哈哈哈哈哈</span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line">&lt;!-- tab --&gt;</span><br><span class="line">**这是选项卡 2** 被设置成默认了</span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line">&lt;!-- tab --&gt;</span><br><span class="line">**这是选项卡 3** 哇，你找到我了！</span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line">&#123;% endtabs %&#125;</span><br></pre></td></tr></table></figure>
+
 <div class="tabs" id="选项卡"><ul class="nav-tabs"><li class="tab"><a href="#选项卡-1">选项卡 1</a></li><li class="tab active"><a href="#选项卡-2">选项卡 2</a></li><li class="tab"><a href="#选项卡-3">选项卡 3</a></li></ul><div class="tab-content"><div class="tab-pane" id="选项卡-1"><p><strong>这是选项卡 1</strong> 呵呵哈哈哈哈哈哈</p>
 </div><div class="tab-pane active" id="选项卡-2"><p><strong>这是选项卡 2</strong> 被设置成默认了</p>
 </div><div class="tab-pane" id="选项卡-3"><p><strong>这是选项卡 3</strong> 哇，你找到我了！</p>
 </div></div></div>
+
 <h2 id="博客参考"><a href="#博客参考" class="headerlink" title="博客参考"></a>博客参考</h2><ul>
-<li><a href="https://blog.dlzhang.com/" target="_blank" rel="noopener">banban ramble</a></li>
-<li><a href="http://dannii.cc/2018/07/23/28blog/" target="_blank" rel="noopener">Divergent</a></li>
-<li><a href="https://www.vincentqin.tech/" target="_blank" rel="noopener">RealCat</a></li>
+<li><p><a href="https://blog.dlzhang.com/" target="_blank" rel="noopener">banban ramble</a></p>
+</li>
+<li><p><a href="http://dannii.cc/2018/07/23/28blog/" target="_blank" rel="noopener">Divergent</a></p>
+</li>
+<li><p><a href="https://www.vincentqin.tech/" target="_blank" rel="noopener">RealCat</a></p>
+</li>
 <li><p><a href="https://www.bluelzy.com/" target="_blank" rel="noopener">BlueLzy’s Blog</a></p>
 </li>
 <li><p><a href="http://gisersqdai.top/" target="_blank" rel="noopener">GISerDaiShaoqing’s Blog</a></p>
@@ -621,7 +639,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -631,10 +649,10 @@
               
               
               <div class="site-state-item site-state-categories">
-                
-                  <span class="site-state-item-count">5</span>
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
-                
+                </a>
               </div>
             
 
@@ -692,7 +710,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#功能实现"><span class="nav-number">1.</span> <span class="nav-text">功能实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#界面美化"><span class="nav-number">2.</span> <span class="nav-text">界面美化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字体设置！！！"><span class="nav-number">2.1.</span> <span class="nav-text">字体设置！！！</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存在但我没打算做的美化"><span class="nav-number">2.2.</span> <span class="nav-text">存在但我没打算做的美化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些很棒的格式"><span class="nav-number">3.</span> <span class="nav-text">一些很棒的格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Note标签"><span class="nav-number">3.1.</span> <span class="nav-text">Note标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Label标签"><span class="nav-number">3.2.</span> <span class="nav-text">Label标签</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#博客参考"><span class="nav-number">4.</span> <span class="nav-text">博客参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#功能实现"><span class="nav-number">1.</span> <span class="nav-text">功能实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#界面美化"><span class="nav-number">2.</span> <span class="nav-text">界面美化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字体设置！！！"><span class="nav-number">2.1.</span> <span class="nav-text">字体设置！！！</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存在但我没打算做的美化"><span class="nav-number">2.2.</span> <span class="nav-text">存在但我没打算做的美化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些很棒的格式"><span class="nav-number">3.</span> <span class="nav-text">一些很棒的格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Note标签"><span class="nav-number">3.1.</span> <span class="nav-text">Note标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Label标签"><span class="nav-number">3.2.</span> <span class="nav-text">Label标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tab-选项卡"><span class="nav-number">3.3.</span> <span class="nav-text">tab 选项卡</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#博客参考"><span class="nav-number">4.</span> <span class="nav-text">博客参考</span></a></li></ol></div>
             
 
           </div>

@@ -424,13 +424,19 @@
 
       
         <div class="note default"><p>上次参考教程<a href="https://haoyu.love/blog640.html#more-640" target="_blank" rel="noopener">本地部署 ShareLatex</a>成功在本地部署sharelatex后，大概是因为没有<code>docker commit</code>，几周之后因为机子一次重启，docker sharelatex恢复到了修改之前的样子，这次再修的时候顺便记录一下。</p></div>
+
 <a id="more"></a>
+
 <h2 id="docker相关"><a href="#docker相关" class="headerlink" title="docker相关"></a>docker相关</h2><h3 id="docker-compose操作"><a href="#docker-compose操作" class="headerlink" title="docker-compose操作"></a>docker-compose操作</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d <span class="comment">#</span></span><br><span class="line">docker-compose start</span><br><span class="line">docker-compose stop</span><br><span class="line">docker <span class="built_in">exec</span> -it sharelatex bash  <span class="comment">#进入sharelatex的bash，不是很明白-it的意思</span></span><br></pre></td></tr></table></figure>
+
 <h3 id="docker-commit"><a href="#docker-commit" class="headerlink" title="docker commit"></a>docker commit</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[sparta@localhost ~]$ docker commit sharelatex sharelatex/sharelatex:full-texlive-install</span><br><span class="line">sha256:36d9d07c7da2ef46b10dbe0e0d9dfc0eb5bc309b562032e76b9c45eb9a8d389b</span><br><span class="line">[sparta@localhost ~]$ docker images</span><br><span class="line">REPOSITORY              TAG                    IMAGE ID            CREATED              SIZE</span><br><span class="line">sharelatex/sharelatex   full-texlive-install   36d9d07c7da2        About a minute ago   9.54GB</span><br><span class="line">mongo                   latest                 b1c8142b3efc        3 weeks ago          410MB</span><br><span class="line">redis                   latest                 a55fbf438dfd        5 weeks ago          95MB</span><br><span class="line">sharelatex/sharelatex   latest                 8e1bae81acac        14 months ago        3.46GB</span><br></pre></td></tr></table></figure>
+
 <h2 id="字体安装"><a href="#字体安装" class="headerlink" title="字体安装"></a>字体安装</h2><p>参考Linux <a href="https://blog.argcv.com/articles/4439.c" target="_blank" rel="noopener">手动安装字体</a></p>
 <p>其实只要把字体放到相应目录下（一般是<code>/usr/share/fonts/</code>）然后刷新字体缓存就可以了</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">fc</span>-cache -fv <span class="comment">#刷新字体缓存</span></span><br><span class="line"><span class="built_in">fc</span>-list <span class="comment">#查看字体，可以配合grep</span></span><br></pre></td></tr></table></figure>
+
 <h3 id="docker与主机的文件拷贝"><a href="#docker与主机的文件拷贝" class="headerlink" title="docker与主机的文件拷贝"></a>docker与主机的文件拷贝</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker cp foo.txt mycontainer:/foo.txt <span class="comment">#主机到docker</span></span><br><span class="line">docker cp mycontainer:/foo.txt foo.txt <span class="comment">#docker到主机</span></span><br></pre></td></tr></table></figure>
+
 <h2 id="惨痛经历"><a href="#惨痛经历" class="headerlink" title="惨痛经历"></a>惨痛经历</h2><p>自己整的时候犯傻好几次：</p>
 <ul>
 <li>因为电脑重启了一次，重启服务的时候sharelatex进的是没有重新安装texlive的版本（原始拉下来的），记起来没有commit的话docker似乎不能保存更改，于是得重新装一次texlive</li>
@@ -578,7 +584,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -588,10 +594,10 @@
               
               
               <div class="site-state-item site-state-categories">
-                
-                  <span class="site-state-item-count">5</span>
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
-                
+                </a>
               </div>
             
 
