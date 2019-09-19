@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.loli.net/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="restconf,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="CESENT公司开源了一套以sysrepo为datastore的网络配置体系。主要有：libyang, sysrepo, libnetconf2, netopeer2，而且libyang和sysrepo是我实现RESTCONF的主要依赖，所以这部分看得比较认真。 但是这篇东西基本上就是libyang的doc里面的概述部分。">
+<meta name="keywords" content="restconf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="libyang-doc">
+<meta property="og:url" content="https://spartazhc.github.io/2019/09/19/libyang-doc/index.html">
+<meta property="og:site_name" content="spartazhc&#39;s blog">
+<meta property="og:description" content="CESENT公司开源了一套以sysrepo为datastore的网络配置体系。主要有：libyang, sysrepo, libnetconf2, netopeer2，而且libyang和sysrepo是我实现RESTCONF的主要依赖，所以这部分看得比较认真。 但是这篇东西基本上就是libyang的doc里面的概述部分。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-19T13:52:21.553Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="libyang-doc">
+<meta name="twitter:description" content="CESENT公司开源了一套以sysrepo为datastore的网络配置体系。主要有：libyang, sysrepo, libnetconf2, netopeer2，而且libyang和sysrepo是我实现RESTCONF的主要依赖，所以这部分看得比较认真。 但是这篇东西基本上就是libyang的doc里面的概述部分。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":20,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://spartazhc.github.io/2019/09/19/libyang-doc/">
+
+
+
+
+
+  <title>libyang-doc | spartazhc's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">spartazhc's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://spartazhc.github.io/2019/09/19/libyang-doc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="spartazhc">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spartazhc's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">libyang-doc</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-19T21:44:38+08:00">
+                2019-09-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/restconf/" itemprop="url" rel="index">
+                    <span itemprop="name">restconf</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/09/19/libyang-doc/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/19/libyang-doc/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/09/19/libyang-doc/" class="leancloud_visitors" data-flag-title="libyang-doc">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+        <div class="note default"><p>CESENT公司开源了一套以sysrepo为datastore的网络配置体系。主要有：<code>libyang</code>, <code>sysrepo</code>, <code>libnetconf2</code>, <code>netopeer2</code>，而且<code>libyang</code>和<code>sysrepo</code>是我实现RESTCONF的主要依赖，所以这部分看得比较认真。</p>
+<p>但是这篇东西基本上就是<code>libyang</code>的doc里面的概述部分。</p></div>
+
+<a id="more"></a>
+
+<h2 id="libyang"><a href="#libyang" class="headerlink" title="libyang"></a>libyang</h2><p><strong>Context - Schema - Data</strong></p>
+<ul>
+<li><p>difference between <em>imported</em> and <em>implemented</em>?</p>
+</li>
+<li><p>functions for schemas have <strong>lys_</strong> prefix while functions for instance data have <strong>lyd_</strong> prefix</p>
+</li>
+</ul>
+<h2 id="YANG"><a href="#YANG" class="headerlink" title="YANG"></a>YANG</h2><ul>
+<li>A <strong>container</strong> node does not have a value, but it has a list of child nodes in the data tree.</li>
+</ul>
+<h2 id="Questions"><a href="#Questions" class="headerlink" title="Questions:"></a>Questions:</h2><ul>
+<li>yang定义的rpc和实现过程中的rpc有什么关系？<ul>
+<li>A: rfc8040里面讲的意思好像是yang里面定义的”rpc”. “action”通过http POST去触发</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">rpc</span> <span class="attr">message-id</span>=<span class="string">"101"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns</span>=<span class="string">"urn:ietf:params:xml:ns:netconf:base:1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">activate-software-image</span> <span class="attr">xmlns</span>=<span class="string">"http://example.com/system"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">image-name</span>&gt;</span>example-fw-2.3<span class="tag">&lt;/<span class="name">image-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">activate-software-image</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">rpc</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">rpc-reply</span> <span class="attr">message-id</span>=<span class="string">"101"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns</span>=<span class="string">"urn:ietf:params:xml:ns:netconf:base:1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">status</span> <span class="attr">xmlns</span>=<span class="string">"http://example.com/system"</span>&gt;</span></span><br><span class="line">    The image example-fw-2.3 is being installed.</span><br><span class="line">    <span class="tag">&lt;/<span class="name">status</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">rpc-reply</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>头部的namespace是怎么写的，是多一点操作就要多加一条相关的吗？</li>
+<li>下面这条rpc， <code>&lt;config&gt;</code>里面的写法还不懂</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">rpc</span> <span class="attr">message-id</span>=<span class="string">"101"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns</span>=<span class="string">"urn:ietf:params:xml:ns:netconf:base:1.0"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:nc</span>=<span class="string">"urn:ietf:params:xml:ns:netconf:base:1.0"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:yang</span>=<span class="string">"urn:ietf:params:xml:ns:yang:1"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">edit-config</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">target</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">running</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">target</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">config</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">system</span> <span class="attr">xmlns</span>=<span class="string">"urn:example:config"</span></span></span><br><span class="line"><span class="tag">                    <span class="attr">xmlns:ex</span>=<span class="string">"urn:example:config"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">user</span> <span class="attr">nc:operation</span>=<span class="string">"create"</span></span></span><br><span class="line"><span class="tag">                        <span class="attr">yang:insert</span>=<span class="string">"after"</span></span></span><br><span class="line"><span class="tag">                        <span class="attr">yang:key</span>=<span class="string">"[ex:first-name=’fred’]</span></span></span><br><span class="line"><span class="tag"><span class="string">                                [ex:surname=’flintstone’]"</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">first-name</span>&gt;</span>barney<span class="tag">&lt;/<span class="name">first-name</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">surname</span>&gt;</span>rubble<span class="tag">&lt;/<span class="name">surname</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">type</span>&gt;</span>admin<span class="tag">&lt;/<span class="name">type</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">user</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">system</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">config</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">edit-config</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">rpc</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>为什么ietf-restconf.yang里面只定义了group</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">The &quot;ietf-restconf&quot; module defines conceptual definitions within an</span><br><span class="line">extension and two groupings, which are not meant to be implemented as</span><br><span class="line">datastore contents by a server. For example, the &quot;restconf&quot;</span><br><span class="line">container is not intended to be implemented as a top-level data node</span><br><span class="line">(under the &quot;/restconf/data&quot; URI).</span><br></pre></td></tr></table></figure>
+
+<h2 id="Context"><a href="#Context" class="headerlink" title="Context"></a>Context</h2><p><strong>ly_ctx_*</strong></p>
+<ul>
+<li><p>The context concept allows callers to work in environments with different sets of YANG schemas.</p>
+</li>
+<li><p>Context holds all modules and their submodules internally. </p>
+</li>
+<li><p>To get a specific module or submodule, use <a href="https://netopeer.liberouter.org/doc/libyang/master/group__context.html#gaf9cd151a6f7cb5246ea34f6681b4e0c2" target="_blank" rel="noopener">ly_ctx_get_module()</a> and <a href="https://netopeer.liberouter.org/doc/libyang/master/group__context.html#ga4e95dad7cc374046b84352eddff3a420" target="_blank" rel="noopener">ly_ctx_get_submodule()</a>. </p>
+</li>
+<li><p>If you need to do something with all the modules or submodules in the context, it is advised to iterate over them using <a href="https://netopeer.liberouter.org/doc/libyang/master/group__context.html#ga8ad57a5482f3c57c099bfd32a17e6f47" target="_blank" rel="noopener">ly_ctx_get_module_iter()</a>, it is the most efficient way. </p>
+</li>
+<li><p>Alternatively, the <a href="https://netopeer.liberouter.org/doc/libyang/master/group__context.html#ga3189ba8857eee441f9f413a8abee0ae5" target="_blank" rel="noopener">ly_ctx_info()</a> function can be used to get complex information about the schemas in the context in the form of data tree defined by <a href="https://tools.ietf.org/html/draft-ietf-netconf-yang-library-04" target="_blank" rel="noopener">ietf-yang-library</a> schema. </p>
+</li>
+<li><p>To get a specific node defined in a module in the context, <a href="https://netopeer.liberouter.org/doc/libyang/master/group__context.html#gaff344e9b687a734352f51b21fa71782f" target="_blank" rel="noopener">ly_ctx_find_path()</a> or <a href="https://netopeer.liberouter.org/doc/libyang/master/group__context.html#gabce6ff4f82d0ce7786d0a89cb70fb369" target="_blank" rel="noopener">ly_ctx_get_node()</a> can be used.</p>
+</li>
+</ul>
+<h2 id="Schemas"><a href="#Schemas" class="headerlink" title="Schemas"></a>Schemas</h2><p><strong>lys_features_*</strong></p>
+<p><strong>lys_parse_*</strong></p>
+<p>Schema is an internal libyang’s representation of a YANG data model. Each schema is connected with its <a href="https://netopeer.liberouter.org/doc/libyang/master/howtocontext.html" target="_blank" rel="noopener">context</a> and loaded using <a href="https://netopeer.liberouter.org/doc/libyang/master/howtoschemasparsers.html" target="_blank" rel="noopener">parser functions</a>. It means, that the schema cannot be created (nor changed) programmatically. In libyang, schemas are used only to access data model definitions.</p>
+<ul>
+<li><p>Basic YANG schemas format described in <a href="http://tools.ietf.org/html/rfc6020" target="_blank" rel="noopener">RFC 6020</a> and <a href="http://tools.ietf.org/html/rfc7951" target="_blank" rel="noopener">RFC 7951</a> (so both YANG 1.0 and YANG 1.1 versions are supported).</p>
+</li>
+<li><p>When the <a href="https://netopeer.liberouter.org/doc/libyang/master/howtocontext.html" target="_blank" rel="noopener">context</a> is created, it already contains the following schemas, which are implemented internally by libyang:</p>
+<ul>
+<li>ietf-yang-metadata@2016-08-05</li>
+<li>yang@2017-02-20</li>
+<li>ietf-inet-types@2013-07-15</li>
+<li>ietf-yang-types@2013-07-15</li>
+<li>ietf-yang-library@2016-06-21</li>
+</ul>
+</li>
+<li><p>The <code>yang</code> schema is the libyang’s internal module to provide namespace and definitions of for various YANG attributes described in <a href="https://tools.ietf.org/html/rfc6243" target="_blank" rel="noopener">RFC 7951</a> (such as <code>insert</code> attribute for edit-config’s data).</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">lys_node</span> &#123;</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *name;                <span class="comment">/**&lt; node name (mandatory) */</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *dsc;                 <span class="comment">/**&lt; description statement (optional) */</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *ref;                 <span class="comment">/**&lt; reference statement (optional) */</span></span><br><span class="line">    <span class="keyword">uint16_t</span> flags;                  <span class="comment">/**&lt; [schema node flags](@ref snodeflags) */</span></span><br><span class="line">    <span class="keyword">uint8_t</span> ext_size;                <span class="comment">/**&lt; number of elements in #ext array */</span></span><br><span class="line">    <span class="keyword">uint8_t</span> iffeature_size;          <span class="comment">/**&lt; number of elements in the #iffeature array */</span></span><br><span class="line">    <span class="keyword">uint8_t</span> padding[<span class="number">4</span>];              </span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">lys_ext_instance</span> **<span class="title">ext</span>;</span>   <span class="comment">/**&lt; array of pointers to the extension instances */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">lys_iffeature</span> *<span class="title">iffeature</span>;</span> <span class="comment">/**&lt; array of if-feature expressions */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">lys_module</span> *<span class="title">module</span>;</span>       <span class="comment">/**&lt; pointer to the node's module (mandatory) */</span></span><br><span class="line">    LYS_NODE nodetype;               <span class="comment">/**&lt; type of the node (mandatory) */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">lys_node</span> *<span class="title">parent</span>;</span>         <span class="comment">/**&lt; pointer to the parent node, NULL in case of a top level node */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">lys_node</span> *<span class="title">child</span>;</span>          </span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">lys_node</span> *<span class="title">next</span>;</span>           <span class="comment">/**&lt; pointer to the next sibling node (NULL if there is no one) */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">lys_node</span> *<span class="title">prev</span>;</span>           </span><br><span class="line">    <span class="keyword">void</span> *priv;                      <span class="comment">/**&lt; private caller's data, not used by libyang */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Data-Instances"><a href="#Data-Instances" class="headerlink" title="Data Instances"></a>Data Instances</h2><p>All data nodes in data trees are connected with their schema node - libyang is not able to represent data of an unknown schema.</p>
+<h3 id="Parsing-data"><a href="#Parsing-data" class="headerlink" title="Parsing data"></a>Parsing data</h3><ul>
+<li><strong>lyd_parse_*</strong></li>
+</ul>
+<h3 id="Manipulating-Data"><a href="#Manipulating-Data" class="headerlink" title="Manipulating Data"></a>Manipulating Data</h3><p>Creating data is generally possible in two ways, they can be combined. </p>
+<ul>
+<li>You can add nodes one-by-one based on the node name and/or its parent (<a href="https://netopeer.liberouter.org/doc/libyang/master/group__datatree.html#ga84863d0360258e3bc4930d598658094b" target="_blank" rel="noopener">lyd_new()</a>, <strong>lyd_new_anydata_*</strong>(), <a href="https://netopeer.liberouter.org/doc/libyang/master/group__datatree.html#ga8cc511af9ca3b3a7048c3a5f6fe8f0db" target="_blank" rel="noopener">lyd_new_leaf()</a>, and their output variants) </li>
+<li>or address the nodes using a simple XPath addressing (<a href="https://netopeer.liberouter.org/doc/libyang/master/group__datatree.html#ga31b3de84e33ece1022738f15fcac4242" target="_blank" rel="noopener">lyd_new_path()</a>). </li>
+<li>The latter enables to create a whole path of nodes, requires less information about the modified data, and is generally simpler to use. The path format specifics can be found <a href="https://netopeer.liberouter.org/doc/libyang/master/howtoxpath.html" target="_blank" rel="noopener">here</a>.</li>
+</ul>
+<p>Working with two data subtrees can also be performed two ways. </p>
+<ul>
+<li>Usually, you would use lyd_insert*() functions. They are generally meant for simple inserts of a node into a data tree. </li>
+<li>For more complicated inserts and when merging 2 trees use <a href="https://netopeer.liberouter.org/doc/libyang/master/group__datatree.html#gad1664b6cac7b4af0cfad588c682c9c3b" target="_blank" rel="noopener">lyd_merge()</a>. It offers additional options and is basically a more powerful insert.</li>
+</ul>
+<h3 id="Validating-Data"><a href="#Validating-Data" class="headerlink" title="Validating Data"></a>Validating Data</h3><ul>
+<li><strong>lyd_validate()</strong></li>
+</ul>
+<h3 id="Default-Values"><a href="#Default-Values" class="headerlink" title="Default Values"></a>Default Values</h3><p>libyang provides support for work with default values as defined in <a href="https://tools.ietf.org/html/rfc6243" target="_blank" rel="noopener">RFC 6243</a>. This document defines 4 modes for handling default nodes in a data tree, libyang adds the fifth mode:</p>
+<ul>
+<li><strong>explicit</strong> - Only the explicitly set configuration data. But in the case of status data, missing default data are added into the tree. In libyang, this mode is represented by <a href="https://netopeer.liberouter.org/doc/libyang/master/group__printerflags.html#ga7c1600afee107c9a10571565c1c359cc" target="_blank" rel="noopener">LYP_WD_EXPLICIT</a> option.</li>
+<li><strong>trim</strong> - Data nodes containing the schema default value are removed. This mode is applied using <a href="https://netopeer.liberouter.org/doc/libyang/master/group__printerflags.html#gadf3263351807e4a7b0274c06310c691a" target="_blank" rel="noopener">LYP_WD_TRIM</a> option.</li>
+<li><strong>report-all</strong> - All the missing default data are added into the data tree. This mode is represented by <a href="https://netopeer.liberouter.org/doc/libyang/master/group__printerflags.html#ga917bb092a127506bb61ef6fc044724de" target="_blank" rel="noopener">LYP_WD_ALL</a> option.</li>
+<li><strong>report-all-tagged</strong> - In this case, all the missing default data are added as in case of the <code>report-all</code> mode, but additionally all the nodes (existing as well as added) containing the schema default value are tagged (see the note below). libyang uses <a href="https://netopeer.liberouter.org/doc/libyang/master/group__printerflags.html#gaf242c90016e3e1dc3e039206f6536786" target="_blank" rel="noopener">LYP_WD_ALL_TAG</a> option for this mode.</li>
+<li><strong>report-implicit-tagged</strong> - The last mode is similar to the previous one, except only the added nodes are tagged. This is the libyang’s extension and it is represented by <a href="https://netopeer.liberouter.org/doc/libyang/master/group__printerflags.html#ga93fa4001f5d73d942ca4cb80c28edeed" target="_blank" rel="noopener">LYP_WD_IMPL_TAG</a> option.</li>
+</ul>
+<h2 id="XPath-Addressing"><a href="#XPath-Addressing" class="headerlink" title="XPath Addressing"></a>XPath Addressing</h2><h3 id="Schema"><a href="#Schema" class="headerlink" title="Schema"></a>Schema</h3><p>Regarding identifying schema nodes, we use a slightly modified version of YANG <strong>augment</strong> target path:</p>
+<ul>
+<li>strictly speaking, most XPath expressions are not accepted, only simple paths (no predicates, numbers, literals, operators, …),</li>
+<li>whenever a prefix is used for a node, it is not the import prefix, but the <strong>module name</strong> itself,</li>
+<li><strong>current module</strong> is specified separately for <em>absolute</em> paths and is the module of the start (current) node for <em>relative</em> paths,</li>
+<li>unprefixed nodes all use the prefix of the <strong>current module</strong> so all nodes from other modules than the <strong>current module</strong> <em>MUST</em> have prefixes,</li>
+<li>nodes from the <strong>current module</strong> <em>MAY</em> have prefixes,</li>
+</ul>
+<h4 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h4><ul>
+<li><p>get all top-level nodes of the <strong>module-name</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/module-name:*</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>get all the descendants of <strong>container</strong> (excluding container)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/module-name:container//*</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>get <strong>aug-leaf</strong>, which was added to <strong>module-name</strong> from an augment module <strong>augment-module</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/module-name:container/container2/augment-module:aug-cont/augment-module:aug-leaf</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="Functions-List"><a href="#Functions-List" class="headerlink" title="Functions List"></a>Functions List</h4><ul>
+<li><a href="https://netopeer.liberouter.org/doc/libyang/master/group__schematree.html#ga4039ced8497a02779ac05c3fee0ad66b" target="_blank" rel="noopener">lys_find_path()</a></li>
+<li><a href="https://netopeer.liberouter.org/doc/libyang/master/group__schematree.html#ga8e5b98c5ef4b5c182485c8d6e3ff3e24" target="_blank" rel="noopener">lys_path()</a></li>
+<li><a href="https://netopeer.liberouter.org/doc/libyang/master/group__context.html#ga30d5e7b3071b6528f5f3b4b20f8225ba" target="_blank" rel="noopener">ly_path_data2schema()</a></li>
+</ul>
+<h3 id="Data"><a href="#Data" class="headerlink" title="Data"></a>Data</h3><p>As for paths evaluated on YANG data, we opted for standardized JSON paths (<a href="https://tools.ietf.org/html/rfc7951#section-6.11" target="_blank" rel="noopener">RFC 7951</a>). Summarized, it follows these conventions:</p>
+<ul>
+<li>generally, you can use almost a full XPath in these paths where it makes sense, but only data nodes (node sets) will always be returned (except for paths, predicates are mostly used),</li>
+<li>as per the specification, prefixes are actually <strong>module names</strong>,</li>
+<li>also in the specification, for <em>absolute</em> paths, the first (leftmost) node <em>MUST</em> have a prefix,</li>
+<li>for <em>relative</em> paths, you specify the <strong>context node</strong>, which then acts as a parent for the first node in the path,</li>
+<li>nodes always inherit their module (prefix) from their <strong>parent node</strong> so whenever a node is from a different module than its parent, it <em>MUST</em> have a prefix,</li>
+<li>nodes from the same module as their <strong>parent</strong> <em>MUST NOT</em> have a prefix,</li>
+<li>different from schema paths, non-data nodes (choice, case, uses, input, output) are skipped and not included in the path.</li>
+</ul>
+<h4 id="Examples-1"><a href="#Examples-1" class="headerlink" title="Examples"></a>Examples</h4><ul>
+<li><p>get <strong>list</strong> instance with <strong>key1</strong> of value <strong>1</strong> and <strong>key2</strong> of value <strong>2</strong> (this can return more <strong>list</strong> instances if there are more keys than <strong>key1</strong> and <strong>key2</strong>)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/module-name:container/list[key1=&apos;1&apos;][key2=&apos;2&apos;]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>get <strong>leaf-list</strong> instance with the value <strong>val</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/module-name:container/leaf-list[.=&apos;val&apos;]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>get <strong>aug-list</strong> with <strong>aug-list-key</strong>, which was added to <strong>module-name</strong> from an augment module <strong>augment-module</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/module-name:container/container2/augment-module:aug-cont/aug-list[aug-list-key=&apos;value&apos;]</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="Functions-List-1"><a href="#Functions-List-1" class="headerlink" title="Functions List"></a>Functions List</h4><h2 id="TEST"><a href="#TEST" class="headerlink" title="TEST"></a>TEST</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># need to kill sysrepod</span></span><br><span class="line">sudo sysrepoctl --uninstall --module=building</span><br><span class="line">sudo sysrepoctl --install --yang=./building@2019-08-07.yang --owner=root:root --permissions=666</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"># yang define</span><br><span class="line"># 这个building是我当时测试多级container的yang，是看一个国外老哥的视频写的，也是yang入门了</span><br><span class="line">#（但是我用的是加了一些东西的下一个version）</span><br><span class="line">module building &#123;</span><br><span class="line">  yang-version 1;</span><br><span class="line">  namespace "urn:building:test";</span><br><span class="line"></span><br><span class="line">  prefix bld;</span><br><span class="line"></span><br><span class="line">  organization "building";</span><br><span class="line">  contact "building address";</span><br><span class="line">  description "yang model for buildings";</span><br><span class="line">  revision "2019-08-07" &#123;</span><br><span class="line">    description "modified revision";</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  container rooms &#123;</span><br><span class="line">    list room &#123;</span><br><span class="line">      key "room-number room-name";</span><br><span class="line">      leaf room-number &#123;</span><br><span class="line">        type uint16;</span><br><span class="line">      &#125;</span><br><span class="line">      leaf room-name &#123;</span><br><span class="line">        type string;</span><br><span class="line">      &#125;</span><br><span class="line">      leaf size &#123;</span><br><span class="line">        type uint32;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+
+      
+        <div>
+          
+            <div>
+    
+        <div style="text-align:center;color: #636363;font-size:14px;letter-spacing: 10px">本文结束啦<i class="fa fa-bell"></i>感谢您的阅读</div>
+    
+</div>
+
+          
+        </div>
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/restconf/" rel="tag"> <i class="fa fa-tag"> </i> restconf</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/19/clixon-backend-restconf/" rel="next" title="clixon_backend_restconf">
+                <i class="fa fa-chevron-left"></i> clixon_backend_restconf
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/19/Netopeer2/" rel="prev" title="Netopeer2">
+                Netopeer2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="spartazhc">
+            
+              <p class="site-author-name" itemprop="name">spartazhc</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/spartazhc" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://douban.com/people/130051643" target="_blank" title="豆瓣">
+                      
+                        <i class="fa fa-fw fa-bug"></i>豆瓣</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#libyang"><span class="nav-number">1.</span> <span class="nav-text">libyang</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#YANG"><span class="nav-number">2.</span> <span class="nav-text">YANG</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Questions"><span class="nav-number">3.</span> <span class="nav-text">Questions:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Context"><span class="nav-number">4.</span> <span class="nav-text">Context</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Schemas"><span class="nav-number">5.</span> <span class="nav-text">Schemas</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-Instances"><span class="nav-number">6.</span> <span class="nav-text">Data Instances</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Parsing-data"><span class="nav-number">6.1.</span> <span class="nav-text">Parsing data</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Manipulating-Data"><span class="nav-number">6.2.</span> <span class="nav-text">Manipulating Data</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Validating-Data"><span class="nav-number">6.3.</span> <span class="nav-text">Validating Data</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Default-Values"><span class="nav-number">6.4.</span> <span class="nav-text">Default Values</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XPath-Addressing"><span class="nav-number">7.</span> <span class="nav-text">XPath Addressing</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Schema"><span class="nav-number">7.1.</span> <span class="nav-text">Schema</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Examples"><span class="nav-number">7.1.1.</span> <span class="nav-text">Examples</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Functions-List"><span class="nav-number">7.1.2.</span> <span class="nav-text">Functions List</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data"><span class="nav-number">7.2.</span> <span class="nav-text">Data</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Examples-1"><span class="nav-number">7.2.1.</span> <span class="nav-text">Examples</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Functions-List-1"><span class="nav-number">7.2.2.</span> <span class="nav-text">Functions List</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TEST"><span class="nav-number">8.</span> <span class="nav-text">TEST</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">spartazhc</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+  <span>　<i class="fa fa-clock"></i></span>
+  <span id="showDays"></span>
+
+
+
+
+<script>
+  var seconds = 1000;
+  var minutes = seconds * 60;
+  var hours = minutes * 60;
+  var days = hours * 24;
+  var years = days * 365;
+  var birthDay = Date.UTC(2019,04,29,00,00,00); // 这里设置建站时间
+  setInterval(function() {
+    var today = new Date();
+    var todayYear = today.getFullYear();
+    var todayMonth = today.getMonth()+1;
+    var todayDate = today.getDate();
+    var todayHour = today.getHours();
+    var todayMinute = today.getMinutes();
+    var todaySecond = today.getSeconds();
+    var now = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+    var diff = now - birthDay;
+    var diffYears = Math.floor(diff/years);
+    var diffDays = Math.floor((diff/days)-diffYears*365);
+    var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+    var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+    var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+      document.getElementById('showDays').innerHTML="本站已运行 "+diffYears+" 年 "+diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒";
+  }, 1000);
+</script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'CyVb5GcDokobJWn5jYs0YPHx-gzGzoHsz',
+        appKey: 'BPpypYK7M7mcSQVUjgoAcQDs',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("CyVb5GcDokobJWn5jYs0YPHx-gzGzoHsz", "BPpypYK7M7mcSQVUjgoAcQDs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
