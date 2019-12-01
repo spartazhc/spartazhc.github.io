@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.loli.net/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="media,streaming,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="因为这周在Tech Forum的Presentation，查找了很多关于Streaming的资料，特别是关于协议的选择，还是学到了很多知识的。这篇Blog一部分是当时准备讲稿的留存，另一部分是之后的完善。因为Bitmovin和WOWZA他们的Blog和Report的质量都相当高，所以这篇某种意义上其只是拾人牙慧的收集整理而已。">
+<meta name="keywords" content="media,streaming">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Streaming Tech">
+<meta property="og:url" content="https://spartazhc.github.io/2019/12/01/Streaming-Tech/index.html">
+<meta property="og:site_name" content="spartazhc&#39;s blog">
+<meta property="og:description" content="因为这周在Tech Forum的Presentation，查找了很多关于Streaming的资料，特别是关于协议的选择，还是学到了很多知识的。这篇Blog一部分是当时准备讲稿的留存，另一部分是之后的完善。因为Bitmovin和WOWZA他们的Blog和Report的质量都相当高，所以这篇某种意义上其只是拾人牙慧的收集整理而已。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://spartazhc.github.io/2019/12/01/Streaming-Tech/image-20191127131654775.png">
+<meta property="og:image" content="https://spartazhc.github.io/2019/12/01/Streaming-Tech/0_sjCFsr2rLPitGrka.png">
+<meta property="og:image" content="https://spartazhc.github.io/2019/12/01/Streaming-Tech/latency-continuum-with-protocols-1140x638.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png">
+<meta property="og:image" content="https://spartazhc.github.io/2019/12/01/Streaming-Tech/CMAF-HLS-DASH-graph.png">
+<meta property="og:updated_time" content="2019-12-01T12:34:33.261Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Streaming Tech">
+<meta name="twitter:description" content="因为这周在Tech Forum的Presentation，查找了很多关于Streaming的资料，特别是关于协议的选择，还是学到了很多知识的。这篇Blog一部分是当时准备讲稿的留存，另一部分是之后的完善。因为Bitmovin和WOWZA他们的Blog和Report的质量都相当高，所以这篇某种意义上其只是拾人牙慧的收集整理而已。">
+<meta name="twitter:image" content="https://spartazhc.github.io/2019/12/01/Streaming-Tech/image-20191127131654775.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":20,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://spartazhc.github.io/2019/12/01/Streaming-Tech/">
+
+
+
+
+
+  <title>Streaming Tech | spartazhc's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">spartazhc's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://spartazhc.github.io/2019/12/01/Streaming-Tech/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="spartazhc">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spartazhc's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Streaming Tech</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-01T20:18:28+08:00">
+                2019-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/media/" itemprop="url" rel="index">
+                    <span itemprop="name">media</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/12/01/Streaming-Tech/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/12/01/Streaming-Tech/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/12/01/Streaming-Tech/" class="leancloud_visitors" data-flag-title="Streaming Tech">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+        <div class="note default"><p>因为这周在Tech Forum的Presentation，查找了很多关于Streaming的资料，特别是关于协议的选择，还是学到了很多知识的。这篇Blog一部分是当时准备讲稿的留存，另一部分是之后的完善。因为Bitmovin和WOWZA他们的Blog和Report的质量都相当高，所以这篇某种意义上其只是拾人牙慧的收集整理而已。</p></div>
+
+<a id="more"></a>
+<h2 id="Streaming-System"><a href="#Streaming-System" class="headerlink" title="Streaming System"></a>Streaming System</h2><ul>
+<li><a href="https://www.wowza.com/blog/complete-guide-to-live-streaming" target="_blank" rel="noopener">WOWZA’s The Complete Guide To LIVE STREAMING</a>, <a href="https://www.wowza.com/uploads/images/The-Complete-Guide-to-Live-Streaming-Wowza.pdf" target="_blank" rel="noopener">[pdf version]</a></li>
+</ul>
+<p><img src="/2019/12/01/Streaming-Tech/image-20191127131654775.png" alt="image-20191127131654775"></p>
+<p>一个常规的直播系统（仅考虑音视频内容相关）有以下部分构成：</p>
+<ul>
+<li>采集端：采集音视频、前处理、编码、封装、推流到服务端</li>
+<li>服务端：转码、推送到边缘端、CDN</li>
+<li>客户端：拉流、解码播放</li>
+<li>一般来说，在采集端选择RTMP之类的传统协议推流到媒体服务器，转码后，用基于HTTP的技术推给客户端。</li>
+</ul>
+<h2 id="Streaming-Types"><a href="#Streaming-Types" class="headerlink" title="Streaming Types"></a>Streaming Types</h2><p>流媒体的解决方案主要与延迟要求相关，不同应用场景对延迟要求不同，极大影响了实现的技术构成。</p>
+<p>应用按延迟要求分类：</p>
+<ul>
+<li>点播：对延迟没有要求</li>
+<li>直播<ul>
+<li>普通直播：延迟要求低</li>
+<li>体育赛事直播：延迟要求较高，与广播延迟在同一级别</li>
+<li>互动直播：延迟要求高</li>
+</ul>
+</li>
+<li>电话会议：延迟要求最严格</li>
+<li>来自EX MACHINA的一张图</li>
+</ul>
+<p><img src="/2019/12/01/Streaming-Tech/0_sjCFsr2rLPitGrka.png" alt="0_sjCFsr2rLPitGrka"></p>
+<h2 id="Streaming-Protocols"><a href="#Streaming-Protocols" class="headerlink" title="Streaming Protocols"></a>Streaming Protocols</h2><ul>
+<li><p>这篇博客基本都谈到了，但是不是特别详细：<a href="https://www.wowza.com/blog/streaming-protocols" target="_blank" rel="noopener">Streaming Protocols: Everything You Need to Know</a></p>
+</li>
+<li><p>协议延迟对比图，来自<a href="https://www.wowza.com/blog/complete-guide-to-live-streaming" target="_blank" rel="noopener">WOWZA</a></p>
+</li>
+</ul>
+<p><img src="/2019/12/01/Streaming-Tech/latency-continuum-with-protocols-1140x638.png" alt="img"></p>
+<h3 id="Traditional-Stateful-Streaming-Protocols"><a href="#Traditional-Stateful-Streaming-Protocols" class="headerlink" title="Traditional Stateful Streaming Protocols"></a>Traditional Stateful Streaming Protocols</h3><h4 id="RTMP-Real-Time-Messaging-Protocol"><a href="#RTMP-Real-Time-Messaging-Protocol" class="headerlink" title="RTMP (Real-Time Messaging Protocol)"></a>RTMP (<em>Real-Time Messaging Protocol</em>)</h4><ul>
+<li><p>将音视频文件分拆成小包，基于TCP传输。</p>
+</li>
+<li><p>是Adobe 的私有协议，Adobe暂停了对FLV与RTMP标准的更新</p>
+</li>
+<li><p>一般传输的是 flv，f4v 格式流</p>
+</li>
+<li><p>RTMP+flv的组合对Codec有限制，只支持到h.264</p>
+<ul>
+<li>FLV不兼容hevc，在FLV规范扩展中加入了hevc支持</li>
+<li>hevc rtmp+flv 推流, 金山修改的ffmpeg：<a href="https://github.com/ksvc/FFmpeg" target="_blank" rel="noopener">https://github.com/ksvc/FFmpeg</a> （改动很小，没有当前版本的改动但是应该不难，但是这个repo已经不再维护了）</li>
+<li><a href="https://blog.csdn.net/vn9PLgZvnPs1522s82g/article/details/79063377" target="_blank" rel="noopener">FFmpeg代码导读——HEVC在RTMP中的扩展</a></li>
+<li>为了减少国际上不必要的不兼容性麻烦，官方FFmpeg并不会对FLV与RTMP中扩展HEVC进行支持。</li>
+<li>添加hevc支持的NRM：<a href="https://github.com/adwpc/nginx-rtmp-module" target="_blank" rel="noopener">https://github.com/adwpc/nginx-rtmp-module</a></li>
+</ul>
+</li>
+<li><p>RTMP根本无法应对当今的贡献挑战。（参考<a href="https://www.haivision.com/blog/live-video-streaming/alternatives-rtmp-getting-streams-internet/" target="_blank" rel="noopener">alternatives-rtmp-getting-streams-internet</a>）原因如下：</p>
+<ul>
+<li>对RTMP的支持正在减弱，CDN 正在淘汰RTMP入口点，转而使用HLS和MPEG-DASH</li>
+<li>RTMP 不支持 <a href="https://www.haivision.com/resources/streaming-video-definitions/hevc-h-265/" target="_blank" rel="noopener">HEVC</a> 编码的流，当然更不可能支持AV1。</li>
+<li>RTMP 无法优雅地支持高分辨率以及VR，360视频等，原因有：<ul>
+<li>缺乏HEVC等高级Codec支持。</li>
+<li>由于带宽限制，RTMP无法以高比特率使用 。</li>
+</ul>
+</li>
+<li>RTMP 使用TCP端口，通过防火墙不便。</li>
+<li>RTMP 遇到安全性，多语言支持和广告插入支持方面的问题。</li>
+</ul>
+</li>
+</ul>
+<h4 id="RTSP-Real-Time-Streaming-Protocol"><a href="#RTSP-Real-Time-Streaming-Protocol" class="headerlink" title="RTSP (Real Time Streaming Protocol)"></a>RTSP (<em>Real Time Streaming Protocol</em>)</h4><ul>
+<li>网络控制协议，专为娱乐和通信系统的使用，以控制流媒体服务器该协议用于在端点之间建立和控制媒体会话。媒体服务器的客户端发出VHS样式的命令，例如<em>播放</em>，<em>录制</em>和<em>暂停</em>，以促进对从服务器到客户端（视频点播）或从客户端到服务器（语音录制）的媒体流进行实时控制。（不是很懂，可能要看一点具体的才知道）</li>
+<li>RTSP标准由IETF制定，1998年发布了<a href="https://tools.ietf.org/html/rfc2326" target="_blank" rel="noopener">RFC 2326</a>，2016年发布了RTSP 2.0 <a href="https://tools.ietf.org/html/rfc7826" target="_blank" rel="noopener">RFC 7826</a>, RTSP 2.0给予RTSP 1.0但是不向后兼容。</li>
+<li>RTSP只是作为协议，具体的RTSP server实现使用 <a href="https://en.wikipedia.org/wiki/Real-time_Transport_Protocol" target="_blank" rel="noopener">Real-time Transport Protocol</a> (RTP) 和 <a href="https://en.wikipedia.org/wiki/RTCP" target="_blank" rel="noopener">Real-time Control Protocol</a> (RTCP) 实现媒体流的交付。RTP和RTCP也是IETF系列。<ul>
+<li>RTP基于UDP，用于媒体流（音视频）的传输。</li>
+<li>RTCP作为控制流用于监控传输状态、QOS及同步。</li>
+</ul>
+</li>
+<li>RTSP是一种协议，允许创建流会话并配置RTP传递的详细信息，是控制协议。RTP是具体打包音频和视频帧并将其发送到客户端的协议。</li>
+<li>作为标准，RTSP支持可以用<a href="https://tools.ietf.org/html/rfc4566" target="_blank" rel="noopener">SDP</a> (Session Description Protocol) 描述的所有视频格式。<ul>
+<li>所以问题在于特定RTSP服务器实现是否支持所有这些格式</li>
+<li>SDP对视频格式的支持性</li>
+</ul>
+</li>
+<li>整体感觉是RTSP现在在直播上用的比较少，并不清楚RTSP 2.0的使用。</li>
+</ul>
+<h3 id="New-Technologies"><a href="#New-Technologies" class="headerlink" title="New Technologies"></a>New Technologies</h3><h4 id="SRT-Secure-Reliable-Transport"><a href="#SRT-Secure-Reliable-Transport" class="headerlink" title="SRT (Secure Reliable Transport)"></a>SRT (<em>Secure Reliable Transport</em>)</h4><p>由Haivision 和 Wowza共同创建，并于2017开源。SRT通过动态适应传输端点之间的实时网络状况，优化了跨不可预测的网络（例如Internet）的流传输性能。这有助于最小化抖动和带宽变化的影响，而纠错机制有助于最大程度地减少数据包丢失。</p>
+<p>它具备以下特点：</p>
+<ul>
+<li><p>编解码器无关</p>
+</li>
+<li><p>旨在解决视频在公共互联网（网络质量不好）的分发挑战</p>
+</li>
+<li><p>安全方面：SRT支持AES加密，保障端到端的视频传输安全;</p>
+</li>
+<li><p>可靠性方面：SRT通过前向纠正技术(FEC)保证传输的稳定性;</p>
+</li>
+<li><p>低延迟方面：SRT底层使用UDT协议，UDT协议是一个老牌的基于UDP的可靠传输协议，当然原生的UDT传输延迟是比较高的，SRT在此基础上做了不少的拥塞控制策略的相关优化以降低传输延时。</p>
+</li>
+</ul>
+<p>SRT协议的缺陷：</p>
+<ul>
+<li>协议复杂度较高</li>
+<li>丢包场景下速度退避较大</li>
+</ul>
+<h4 id="WebRTC"><a href="#WebRTC" class="headerlink" title="WebRTC"></a>WebRTC</h4><ul>
+<li><p><a href="https://webrtc.org" target="_blank" rel="noopener">https://webrtc.org</a></p>
+</li>
+<li><p>用于视频会议</p>
+</li>
+<li><p>基于Web</p>
+</li>
+</ul>
+<h3 id="HTTP-Based-Adaptive-Streaming-Protocols"><a href="#HTTP-Based-Adaptive-Streaming-Protocols" class="headerlink" title="HTTP-Based Adaptive Streaming Protocols"></a>HTTP-Based Adaptive Streaming Protocols</h3><p>所有现有的自适应HTTP流技术，例如专有的 <strong>Adobe HTTP动态流（HDS）</strong>，<strong><a href="http://bitmovin.com/apple-http-live-streaming-hls/" target="_blank" rel="noopener">Apple HTTP实时流（HLS）</a></strong>，<strong><a href="http://bitmovin.com/microsoft-smooth-streaming-mss/" target="_blank" rel="noopener">Microsoft平滑流（MSS）</a></strong>，以及唯一的国际标准化解决方案 <strong><a href="http://bitmovin.com/dynamic-adaptive-streaming-http-mpeg-dash/" target="_blank" rel="noopener">MPEG动态HTTP自适应流（MPEG-DASH）</a></strong> 遵循几乎相同的原则。</p>
+<p>基本思想是生成相同内容的多个版本（例如，不同的比特率或空间分辨率），并将这些版本划分为片段（例如，两秒钟）。片段在Web服务器上提供，可以通过与HTTP标准兼容的方式下载GET请求。通常，不同版本之间的关系由清单描述，该清单在流传输会话之前提供给客户端。清单使用HTTP统一资源定位符（URL）表示媒体内容的不同质量以及每种质量的各个部分。这种结构提供了片段与比特率（分辨率等）之间的绑定（例如，开始时间，片段的持续时间）。作为结果，在每个段的客户端都对比特率或空间分辨率进行调整，例如，如果带宽允许，客户端可以在每个段的基础上切换到更高的比特率，或者在带宽减少的情况下切换到更低的比特率。这具有几个优点，因为客户端最了解其功能，例如接收的吞吐量，延迟，设备功能（例如，屏幕分辨率）等。</p>
+<ul>
+<li>来自：<a href="https://bitmovin.com/mpeg-dash-vs-apple-hls-vs-microsoft-smooth-streaming-vs-adobe-hds/" target="_blank" rel="noopener">MPEG-DASH vs. Apple HLS vs. Microsoft Smooth Streaming vs. Adobe HDS</a> （这篇Bitmovin里有一个表非常棒，感谢markdown，它现在是我的了2333）</li>
+</ul>
+<table width="100%">
+<tbody>
+<tr>
+<td width="30%"><strong>Feature</strong></td>
+<td style="text-align: center;" width="8%"><strong>Adobe</strong> <strong>HDS</strong></td>
+<td style="text-align: center;" width="7%"><a href="http://bitmovin.com/apple-http-live-streaming-hls/" target="_blank" rel="noopener"><strong>Apple</strong> <strong>HLS</strong></a></td>
+<td style="text-align: center;" width="11%"><a href="http://bitmovin.com/microsoft-smooth-streaming-mss/" target="_blank" rel="noopener"><strong>MS</strong> <strong>Smooth Streaming</strong></a></td>
+<td style="text-align: center;" width="8%"><a href="http://bitmovin.com/dynamic-adaptive-streaming-http-mpeg-dash/" target="_blank" rel="noopener"><strong>MPEG</strong>&#8211;<strong>DASH</strong></a></td>
+</tr>
+<tr>
+<td>Deployment on Ordinary HTTP Servers</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+</tr>
+<tr>
+<td>Official International Standard (e.g., ISO/IEC MPEG)</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+</tr>
+<tr>
+<td>Multiple Audio Channels (e.g., Languages, Comments, etc.)</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+</tr>
+<tr>
+<td>Flexible Content Protection with Common Encryption (<a href="https://bitmovin.com/digital-rights-management-everything-to-know/" target="_blank" rel="noopener">DRM</a>)</td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+</tr>
+<tr>
+<td>Closed Captions / Subtitles</td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+</tr>
+<tr>
+<td>Efficent Ad Insertion</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+</tr>
+<tr>
+<td>Fast Channel Switching</td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+</tr>
+<tr>
+<td>Protocol Support&#8217;s multiple CDNs in parallel</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+</tr>
+<tr>
+<td>HTML5 Support</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+</tr>
+<tr>
+<td>Support in HbbTV (version 1.5)</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+</tr>
+<tr>
+<td><a href="http://bitmovin.com/mpeg-dash-hevc-encoding/" target="_blank" rel="noopener">HEVC Ready (UHD/4K)</a></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+</tr>
+<tr>
+<td>Agnostic to Video <a href="https://bitmovin.com/get-ready-for-a-multi-codec-world/" target="_blank" rel="noopener">Codecs</a></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+</tr>
+<tr>
+<td>Agnostic to Audio Codecs</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+</tr>
+<tr>
+<td>ISO Base Media File Format Segments</td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+</tr>
+<tr>
+<td>MPEG-2 TS Segments</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+</tr>
+<tr>
+<td>Segment Format Extensions beyond MPEG</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+</tr>
+<tr>
+<td>Support for multiplexed (Audio + Video) Content</td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+</tr>
+<tr>
+<td>Support for non-multiplexed (separate Audio, Video) Content</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+</tr>
+<tr>
+<td>Definition of Quality Metrics</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+</tr>
+<tr>
+<td>Client Logging &amp; Reporting</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+</tr>
+<tr>
+<td>Client Failover</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+</tr>
+<tr>
+<td>Remove and add Quality Levels during Streaming</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+</tr>
+<tr>
+<td>Multiple Video Views</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></td>
+</tr>
+<tr>
+<td>Efficient Trick Modes</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span style="line-height: 1.5;"><img class="size-full wp-image-7418 aligncenter" src="https://bitmovin.com/wp-content/uploads/2016/04/tick_green_sm2.png" alt="tick_green_sm2" width="40" height="40"></span></td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="HLS-HTTP-Live-Streaming"><a href="#HLS-HTTP-Live-Streaming" class="headerlink" title="HLS (HTTP Live Streaming)"></a>HLS (<em>HTTP Live Streaming</em>)</h4><ul>
+<li><p>HLS 的延时包含了 TCP 握手、m3u8 文件下载与解析、ts 文件下载与解析等多个步骤。可以缩短列表的长度和单个 ts 文件的大小来降低延迟，极致来说可以缩减列表长度为 1，并且 ts 的时长为 1s，但是这样会造成请求次数增加，增大服务器压力，当网速慢时回造成更多的缓冲，所以苹果官方推荐的 ts 时长时 10s，所以这样就会大改有 30s 的延迟。</p>
+</li>
+<li><p>HLS 由两部分构成，一个是 .m3u8 文件，一个是 .ts 视频文件；每一个 .m3u8 文件，分别对应若干个 ts 文件，这些 ts 文件才是真正存放视频的数据，m3u8 文件只是存放了一些 ts 文件的配置信息和相关路径，当视频播放时，.m3u8 是动态改变的，video 标签会解析这个文件，并找到对应的 ts 文件来播放，所以一般为了加快速度，.m3u8 放在 web 服务器上，ts 文件放在 CDN 上。 HLS 协议视频支持 H.264 格式的编码，支持的音频编码方式是 AAC 编码。</p>
+</li>
+<li><p>以下是<code>.m3u8</code>文件的示例，处于对ABR的支持，如果HLS编多个不同分辨率和码率的流，会有两级目录：<code>master.m3u8</code>定义了子流的各项信息，子流中才是具体的<code>.ts</code>段信息。</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># master.m3u8</span></span><br><span class="line"><span class="comment">#EXTM3U</span></span><br><span class="line"><span class="comment">#EXT-X-VERSION:6</span></span><br><span class="line"><span class="comment">#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2855600,CODECS="avc1.4d001f,mp4a.40.2",RESOLUTION=960x540</span></span><br><span class="line">live/medium.m3u8</span><br><span class="line"><span class="comment">#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=5605600,CODECS="avc1.640028,mp4a.40.2",RESOLUTION=1280x720</span></span><br><span class="line">live/high.m3u8</span><br><span class="line"><span class="comment">#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=1755600,CODECS="avc1.42001f,mp4a.40.2",RESOLUTION=640x360</span></span><br><span class="line">live/low.m3u8</span><br><span class="line"><span class="comment">#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=545600,CODECS="avc1.42001e,mp4a.40.2",RESOLUTION=416x234</span></span><br><span class="line">live/cellular.m3u8</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># http://ivi.bupt.edu.cn/hls/cctv1hd.m3u8</span></span><br><span class="line"><span class="comment">#EXTM3U</span></span><br><span class="line"><span class="comment">#EXT-X-VERSION:3</span></span><br><span class="line"><span class="comment">#EXT-X-MEDIA-SEQUENCE:58846</span></span><br><span class="line"><span class="comment">#EXT-X-TARGETDURATION:10</span></span><br><span class="line"><span class="comment">#EXTINF:10.000,</span></span><br><span class="line">cctv1hd-1574835047000.ts</span><br><span class="line"><span class="comment">#EXTINF:10.000,</span></span><br><span class="line">cctv1hd-1574835057000.ts</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h5 id="LHLS-Low-Latency-HLS"><a href="#LHLS-Low-Latency-HLS" class="headerlink" title="LHLS (Low-Latency HLS)"></a>LHLS (Low-Latency HLS)</h5><ul>
+<li><p>详见：<a href="https://developer.apple.com/videos/play/wwdc2019/502/" target="_blank" rel="noopener">Introducing Low-Latency HLS</a></p>
+</li>
+<li><p>spec: <a href="https://developer.apple.com/documentation/http_live_streaming/protocol_extension_for_low_latency_hls" target="_blank" rel="noopener">https://developer.apple.com/documentation/http_live_streaming/protocol_extension_for_low_latency_hls</a></p>
+</li>
+<li><p>LHLS的主要优化在于（来自上述演讲的PPT）：</p>
+<ul>
+<li>Reduce Publishing Latency<ul>
+<li>Partial Segments<ul>
+<li>Partial segment rather than regular segment<ul>
+<li>CMAF Chunks, or short TS, audio or VTT</li>
+<li>Less than a full GOP</li>
+</ul>
+</li>
+<li>Playlists update every Partial Segment</li>
+<li>Publishing latency becomes the Partial Segment duration</li>
+<li>Partial Segments appear in parallel to regular Segments in Playlist</li>
+</ul>
+</li>
+<li>Partial Segments Disappear Quickly<ul>
+<li>Partial Segments only at live edge of Playlist<ul>
+<li>Removed once Parent Segments are established</li>
+<li>Keeps Playlists small</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Optimize Discovery<ul>
+<li>Optimize Segment Discovery</li>
+<li>Improve Caching Behvior</li>
+<li>Blocking Playlist Reload<ul>
+<li>Clients ask for its next Playlist update in advance</li>
+<li>Server holds request until next Segment or Partial Segment appears</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Eliminate Segment Round Trip<ul>
+<li>HTTP/2 is required for LHLS<ul>
+<li>HTTP/2 GET response can include secondary resources</li>
+</ul>
+</li>
+<li>Segment Push<ul>
+<li>GET of Playlist also pushes new Segment</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Reduce Playlist Transer Overhead<ul>
+<li>Playlist Delta Updates<ul>
+<li>Clients asks for Delta Update explicitly</li>
+<li>Update skips the earlier part of Playlist client already has</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Switch Tiers Quickly<ul>
+<li>Rendition Reports<ul>
+<li>Playlist updates can carry up-to-date reports on peer Playlists<ul>
+<li>Last Media Sequence Number and last Partial Segment number</li>
+<li>Allows client to load latest Playlist when switching bit rates</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>一点解释来自：<a href="https://www.harmonicinc.com/news-insights/blog/dash-and-hls-update-low-latency-ott-delivery/" target="_blank" rel="noopener">DASH和HLS：低延迟OTT交付的更新</a></p>
+<p>与今天广泛部署和使用的HLS规范相比，新的HLS更新提供了一些显着的增强：</p>
+<ul>
+<li><strong>部分分段：</strong>先前的HLS规范非常简单，交付分段为6秒。低延迟HLS将提供在媒体播放列表的实时边缘传送媒体的工具，在媒体播放列表中，媒体被分成大量较小的文件，例如持续时间为250-300ms的CMAF块（很少帧，但没有完整的GOP ）。这些较小的文件称为HLS局部段。部分片段的持续时间较短，可以比其父片段更早地打包并添加到媒体播放列表。第一个部分片段可能在前一个片段发布后仅250毫秒后发布。为了避免播放列表太大，一旦部分片段比实时边缘的三个目标时长长，它们就会自动从媒体播放列表中删除。</li>
+<li><strong>HTTP / 2推送段：</strong>传统上，对于每个段，HLS播放器都会轮询播放列表文件以检查是否有新的可用段，然后使用第二个HTTP请求来检索媒体段。当需要低延迟交付时，这些传统HTTP请求的开销在延迟方面会成为问题。苹果公司的新规范使用HTTP / 2推送来推送较短的媒体“部分”，以响应播放列表请求。但是，播放列表必须非常频繁地获取，因为每秒最多可能会发生3-4次。</li>
+<li><strong>阻止播放列表请求：</strong>在媒体播放列表更新中，播放器可以添加查询参数以指定其希望播放列表响应包含将来的片段。然后，服务器可以保留该请求（阻止），直到包含该片段的播放列表的版本可用为止。客户端还可以要求服务器将指示的片段与播放列表响应一起推送到客户端。阻止播放列表重载可消除轮询，而服务器推送可消除请求往返。</li>
+<li><strong>播放列表增量更新：</strong>对于长时间运行的事件，播放列表大小可能会成为问题。随着更短的片段和片段的引入，这将变得更加关键，因为将发出更频繁的播放列表更新请求。在此HLS更新中，Apple提供了一种生成“增量”播放列表的方法，这意味着播放列表仅包含完整播放列表中的某些片段。这允许玩家一次请求完整的播放列表，将其存储并使用较小的增量播放列表添加到其中，该播放列表仅包含最新的几个片段以及播放列表顶部的低延迟“部分”。</li>
+<li><strong>更快的比特率切换：</strong>通过低延迟交付，播放器对网络状况变化做出反应的时间更少。低延迟HLS允许特定格式的播放列表响应包含有关另一个格式中可用的最新块和段的信息。这样就可以跳入另一个表示形式，而无需在启动切换之前发出完整的播放列表请求。</li>
+</ul>
+</li>
+</ul>
+<h4 id="MPEG-DASH-Dynamic-Adaptive-Streaming-over-HTTP-ISO-IEC-23009-1"><a href="#MPEG-DASH-Dynamic-Adaptive-Streaming-over-HTTP-ISO-IEC-23009-1" class="headerlink" title="MPEG-DASH (Dynamic Adaptive Streaming over HTTP,  ISO/IEC 23009-1)"></a>MPEG-DASH (<em>Dynamic Adaptive Streaming over HTTP,  ISO/IEC 23009-1</em>)</h4><ul>
+<li>Netflix使用了MPEG-DASH</li>
+<li>MPEG-DASH是和编码标准无关的</li>
+<li>MPEG-DASH是MPEG开发的，与其他三个以厂商为中心的解决方案对比，相当于是国际标准</li>
+<li><a href="https://bitmovin.com/dynamic-adaptive-streaming-http-mpeg-dash/" target="_blank" rel="noopener">MPEG-DASH (Dynamic Adaptive Streaming over HTTP)</a>这篇博客已经讲的很好了，我觉得我没有必要献丑了，再贴一些MPEG-DASH的资源就罢。</li>
+</ul>
+<h4 id="HDS-HTTP-Dynamic-Streaming"><a href="#HDS-HTTP-Dynamic-Streaming" class="headerlink" title="HDS (HTTP Dynamic Streaming)"></a>HDS (<em>HTTP Dynamic Streaming</em>)</h4><ul>
+<li>Adobe的技术，没怎么看到有用的。</li>
+</ul>
+<h4 id="MSS-Microsoft-Smooth-Streaming"><a href="#MSS-Microsoft-Smooth-Streaming" class="headerlink" title="MSS (Microsoft Smooth Streaming)"></a>MSS (<em>Microsoft Smooth Streaming</em>)</h4><ul>
+<li>感觉是过气技术了。</li>
+</ul>
+<h4 id="CMAF-Common-Media-Application-Format"><a href="#CMAF-Common-Media-Application-Format" class="headerlink" title="CMAF (Common Media Application Format)"></a>CMAF (<em>Common Media Application Format</em>)</h4><ul>
+<li><p>来自：<a href="https://www.wowza.com/blog/what-is-cmaf" target="_blank" rel="noopener">What is CMAF?</a></p>
+</li>
+<li><p>Purpose:</p>
+<ul>
+<li>Use a common media format for video streams — thereby reducing costs, complexity, and latency.</li>
+</ul>
+</li>
+<li><p>Goals:</p>
+<ul>
+<li>Eliminate investments associated with encoding and storing multiple copies of the same content.</li>
+<li>Simplify workflows and improve CDN efficiency.</li>
+<li>Decrease video lag by with chunked-encoded and chunked-transfer CMAF.</li>
+</ul>
+</li>
+<li><p>Timeline:</p>
+<ul>
+<li><strong>February 2016:</strong> <strong>Apple and Microsoft</strong> proposed CMAF to the Moving Pictures Expert Group (MPEG).</li>
+<li><strong>June 2016:</strong> Apple announced support of fMP4 format.</li>
+<li><strong>July 2017:</strong> Specifications finalized.</li>
+<li><strong>January 2018:</strong> CMAF standard officially published.</li>
+</ul>
+</li>
+<li><p>这样，对于apple的HLS，现在有两个低延迟方案了：LHLS和CMAF</p>
+</li>
+<li><p>参考：<a href="https://www.wowza.com/blog/low-latency-cmaf-chunked-transfer-encoding" target="_blank" rel="noopener">Low-Latency CMAF for Live Streaming at Scale</a></p>
+</li>
+<li><p>HLS之前使用的是.ts格式，使用CMAF会转到.mp4，有助于降低成本，提高CDN效率</p>
+</li>
+</ul>
+<p><img src="/2019/12/01/Streaming-Tech/CMAF-HLS-DASH-graph.png" alt="img"></p>
+<ul>
+<li>CMAF本身是一种媒体格式，它的低延迟通过两个行为实现<ul>
+<li>chunked encoding (分块编码)</li>
+<li>chunked transfer encoding (分块传输编码)</li>
+</ul>
+</li>
+<li>比较具体的CMAF blog：<a href="https://blogs.akamai.com/2018/10/best-practices-for-ultra-low-latency-streaming-using-chunked-encoded-and-chunk-transferred-cmaf.html" target="_blank" rel="noopener">BEST PRACTICES FOR ULTRA-LOW LATENCY STREAMING USING CHUNKED-ENCODED AND CHUNK-TRANSFERRED CMAF</a></li>
+</ul>
+<h3 id="How-to-choose-Steaming-Protols"><a href="#How-to-choose-Steaming-Protols" class="headerlink" title="How to choose Steaming Protols"></a>How to choose Steaming Protols</h3><ul>
+<li><p>协议基于TCP / UDP可以反映一些信息：</p>
+<ul>
+<li>基于TCP的协议更可靠，更消耗资源？</li>
+<li>基于UDP更注重传输实时性</li>
+</ul>
+</li>
+<li><p>协议基于HTTP意味着：</p>
+<ul>
+<li>从HTTP走流量，无需担心端口、防火墙等问题</li>
+<li>可以使用HTTP cache</li>
+<li>移动端无需APP，兼容HTML5的浏览器就可以看</li>
+<li>将多个帧一起打包传输，实时性欠缺</li>
+<li>在CDN上的伸缩性好</li>
+</ul>
+</li>
+<li><p>因此，在实际应用中，一般在采集端推流到媒体服务器会使用一些传统的协议，RTMP、RTSP，或者是SRT（也有很多厂商自己定制的私有协议），之后的分发会使用给予HTTP的自适应流媒体技术。</p>
+</li>
+<li><p>想要低延迟可以定制化私有协议。</p>
+</li>
+</ul>
+<h2 id="AV1-Streaming"><a href="#AV1-Streaming" class="headerlink" title="AV1 Streaming"></a>AV1 Streaming</h2><h3 id="AV1-Current-Status"><a href="#AV1-Current-Status" class="headerlink" title="AV1 Current Status"></a>AV1 Current Status</h3><ul>
+<li>编码复杂度高，编码优化不够完善：慢！<ul>
+<li>只有较强的服务器上可以实时编码1080p及以上</li>
+<li>因此，很难用于极端低延迟条件的应用场景，不考虑这一使用场景</li>
+</ul>
+</li>
+<li>不应该用于极端低延迟应用场景<ul>
+<li>此类应用场景，如电话会议，参与人数较少，（这类场景没有那么流量成本敏感？）</li>
+<li>AV1既然有高复杂度的特性，使用AV1的主要目的在于传输同等质量的视频时，降低比特率，降低带宽的使用，从而降低流量成本。</li>
+<li>因此AV1的用武之地不在这里。</li>
+</ul>
+</li>
+<li>协议支持不够完善<ul>
+<li>MPEG-DASH是Codec无关的协议，可以使用</li>
+<li>HLS限制Codec，似乎还没支持AV1，但Apple也是AOM的成员，后续肯定会加入AV1.</li>
+<li>RTMP不能支持（也不应该考虑了）</li>
+</ul>
+</li>
+<li>一般延迟要求的直播10s，差不多是HLS和DASH的延迟范围，可以达到。</li>
+<li>当前实现：pc: RTSP+x264 -&gt; server: dash+svtav1 -&gt; client</li>
+</ul>
+<h3 id="AV1-Prospect"><a href="#AV1-Prospect" class="headerlink" title="AV1 Prospect"></a>AV1 Prospect</h3><ul>
+<li>from <strong>twitch</strong>: we are hoping <strong>2022-2023 we are going to release AV1 for the head content</strong>. But for the head content, we will continue to stream dual-format, AV1, H.264. But for the tail content, we are hoping towards five years from now to AV1, whole eco, every five-year-old device supports AV1. Then, we will be switching to AV1 100%.</li>
+<li>因为免版税，又有Netflix、YouTube等大厂，AV1未来在互联网媒体肯定是最重要的编码标准。</li>
+</ul>
+<h3 id="AV1-Streaming-Implement"><a href="#AV1-Streaming-Implement" class="headerlink" title="AV1 Streaming Implement"></a>AV1 Streaming Implement</h3><ul>
+<li><p>Web server: Nginx</p>
+</li>
+<li><p>Codec: libx264, libsvt_av1</p>
+</li>
+<li><p>Server: Intel Xeon Platinum 8280</p>
+</li>
+<li><p>Protocol: RTSP, MPEG-DASH (RTSP can be replaced by RTMP or SRT)</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pc ------------&gt; server -------------------&gt; client</span></span><br><span class="line"><span class="comment">#	  rtsp+h264  |transcode| dash+libsvt_av1</span></span><br><span class="line"><span class="comment"># pc side</span></span><br><span class="line">ffmpeg -s 1920x1080 -r 30 -f x11grab -i :0.0+0,0 \</span><br><span class="line">-c:v libx264 -tune zerolatency -preset ultrafast -crf 0 \</span><br><span class="line">-f rtsp -muxdelay 0 -rtsp_transport tcp     \</span><br><span class="line">rtsp://your-serverIP/live.sdp</span><br><span class="line">-----------------------------------</span><br><span class="line"><span class="comment"># server side</span></span><br><span class="line">ffmpeg -rtsp_flags listen -i rtsp://your-serverIP:8888 \</span><br><span class="line">-map 0 -map 0\</span><br><span class="line">-c:a aac -c:v libsvt_av1 -preset 8 -forced-idr 1  \</span><br><span class="line">-b:v:0 5000k -s:v:0 1920x1080  \</span><br><span class="line">-b:v:1 2000k -s:v:1 1280x720  \</span><br><span class="line">-sc_threshold 0 -b_strategy 0 -ar:a:1 22050 \</span><br><span class="line">-use_timeline 1 -use_template 1  -window_size 5 \</span><br><span class="line">-adaptation_sets <span class="string">"id=0,streams=v id=1,streams=a"</span> \</span><br><span class="line">-hls_playlist 1 -seg_duration 2 -streaming 1   \</span><br><span class="line">-dash_segment_type 2 -strict experimental -lhls 1  \</span><br><span class="line">-f dash manifest.mpd</span><br><span class="line">-----------------------------------</span><br><span class="line"><span class="comment"># play</span></span><br><span class="line">mpv http://your-serverIP/master.m3u8</span><br></pre></td></tr></table></figure>
+
+<h2 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h2><h3 id="Report"><a href="#Report" class="headerlink" title="Report"></a>Report</h3><ul>
+<li><p>感觉Bitmovin和WOWZA两家的blog质量都很高，尤其是他们出的报告简直太棒了。</p>
+<ul>
+<li><a href="https://go.bitmovin.com/video-developer-report-2019" target="_blank" rel="noopener">BITMOVIN 2019 VIDEO DEVELOPER REPORT</a></li>
+<li><a href="https://www.wowza.com/blog/2019-video-streaming-latency-report" target="_blank" rel="noopener">WOWZA 2019 Video Streaming Latency Report</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="Some-Protocol-Implements"><a href="#Some-Protocol-Implements" class="headerlink" title="Some Protocol Implements"></a>Some Protocol Implements</h3><ul>
+<li><a href="https://github.com/AirenSoft/OvenMediaEngine" target="_blank" rel="noopener">OvenMediaEngine</a></li>
+<li><a href="https://github.com/ossrs/srs" target="_blank" rel="noopener">Simple-RTMP-Server</a></li>
+<li><a href="https://github.com/Haivision/srt" target="_blank" rel="noopener">SRT</a></li>
+<li><a href="https://github.com/arut/nginx-rtmp-module" target="_blank" rel="noopener">nginx-rtmp-module</a>; <a href="https://github.com/aileone/nginx-rtmp-module" target="_blank" rel="noopener">hevc support repo</a></li>
+</ul>
+<hr>
+
+      
+        <div>
+          
+            <div>
+    
+        <div style="text-align:center;color: #636363;font-size:14px;letter-spacing: 10px">本文结束啦<i class="fa fa-bell"></i>感谢您的阅读</div>
+    
+</div>
+
+          
+        </div>
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/media/" rel="tag"> <i class="fa fa-tag"> </i> media</a>
+          
+            <a href="/tags/streaming/" rel="tag"> <i class="fa fa-tag"> </i> streaming</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/21/Install-cgdb-from-source-and-configurate-it-for-c/" rel="next" title="Install cgdb from source and configurate it for c++">
+                <i class="fa fa-chevron-left"></i> Install cgdb from source and configurate it for c++
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/12/01/Codec-Test/" rel="prev" title="Codec Test">
+                Codec Test <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="spartazhc">
+            
+              <p class="site-author-name" itemprop="name">spartazhc</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/spartazhc" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://douban.com/people/130051643" target="_blank" title="豆瓣">
+                      
+                        <i class="fa fa-fw fa-bug"></i>豆瓣</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Streaming-System"><span class="nav-number">1.</span> <span class="nav-text">Streaming System</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Streaming-Types"><span class="nav-number">2.</span> <span class="nav-text">Streaming Types</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Streaming-Protocols"><span class="nav-number">3.</span> <span class="nav-text">Streaming Protocols</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Traditional-Stateful-Streaming-Protocols"><span class="nav-number">3.1.</span> <span class="nav-text">Traditional Stateful Streaming Protocols</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#RTMP-Real-Time-Messaging-Protocol"><span class="nav-number">3.1.1.</span> <span class="nav-text">RTMP (Real-Time Messaging Protocol)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RTSP-Real-Time-Streaming-Protocol"><span class="nav-number">3.1.2.</span> <span class="nav-text">RTSP (Real Time Streaming Protocol)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#New-Technologies"><span class="nav-number">3.2.</span> <span class="nav-text">New Technologies</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SRT-Secure-Reliable-Transport"><span class="nav-number">3.2.1.</span> <span class="nav-text">SRT (Secure Reliable Transport)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WebRTC"><span class="nav-number">3.2.2.</span> <span class="nav-text">WebRTC</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-Based-Adaptive-Streaming-Protocols"><span class="nav-number">3.3.</span> <span class="nav-text">HTTP-Based Adaptive Streaming Protocols</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HLS-HTTP-Live-Streaming"><span class="nav-number">3.3.1.</span> <span class="nav-text">HLS (HTTP Live Streaming)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#LHLS-Low-Latency-HLS"><span class="nav-number">3.3.1.1.</span> <span class="nav-text">LHLS (Low-Latency HLS)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MPEG-DASH-Dynamic-Adaptive-Streaming-over-HTTP-ISO-IEC-23009-1"><span class="nav-number">3.3.2.</span> <span class="nav-text">MPEG-DASH (Dynamic Adaptive Streaming over HTTP,  ISO/IEC 23009-1)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HDS-HTTP-Dynamic-Streaming"><span class="nav-number">3.3.3.</span> <span class="nav-text">HDS (HTTP Dynamic Streaming)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MSS-Microsoft-Smooth-Streaming"><span class="nav-number">3.3.4.</span> <span class="nav-text">MSS (Microsoft Smooth Streaming)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CMAF-Common-Media-Application-Format"><span class="nav-number">3.3.5.</span> <span class="nav-text">CMAF (Common Media Application Format)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#How-to-choose-Steaming-Protols"><span class="nav-number">3.4.</span> <span class="nav-text">How to choose Steaming Protols</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AV1-Streaming"><span class="nav-number">4.</span> <span class="nav-text">AV1 Streaming</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AV1-Current-Status"><span class="nav-number">4.1.</span> <span class="nav-text">AV1 Current Status</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AV1-Prospect"><span class="nav-number">4.2.</span> <span class="nav-text">AV1 Prospect</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AV1-Streaming-Implement"><span class="nav-number">4.3.</span> <span class="nav-text">AV1 Streaming Implement</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Appendix"><span class="nav-number">5.</span> <span class="nav-text">Appendix</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Report"><span class="nav-number">5.1.</span> <span class="nav-text">Report</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Some-Protocol-Implements"><span class="nav-number">5.2.</span> <span class="nav-text">Some Protocol Implements</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">spartazhc</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+  <span>　<i class="fa fa-clock"></i></span>
+  <span id="showDays"></span>
+
+
+
+
+<script>
+  var seconds = 1000;
+  var minutes = seconds * 60;
+  var hours = minutes * 60;
+  var days = hours * 24;
+  var years = days * 365;
+  var birthDay = Date.UTC(2019,04,29,00,00,00); // 这里设置建站时间
+  setInterval(function() {
+    var today = new Date();
+    var todayYear = today.getFullYear();
+    var todayMonth = today.getMonth()+1;
+    var todayDate = today.getDate();
+    var todayHour = today.getHours();
+    var todayMinute = today.getMinutes();
+    var todaySecond = today.getSeconds();
+    var now = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+    var diff = now - birthDay;
+    var diffYears = Math.floor(diff/years);
+    var diffDays = Math.floor((diff/days)-diffYears*365);
+    var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+    var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+    var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+      document.getElementById('showDays').innerHTML="本站已运行 "+diffYears+" 年 "+diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒";
+  }, 1000);
+</script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'CyVb5GcDokobJWn5jYs0YPHx-gzGzoHsz',
+        appKey: 'BPpypYK7M7mcSQVUjgoAcQDs',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("CyVb5GcDokobJWn5jYs0YPHx-gzGzoHsz", "BPpypYK7M7mcSQVUjgoAcQDs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
