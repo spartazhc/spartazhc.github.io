@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>spartazhc&#39;s blog</title>
+  <icon>https://spartazhc.github.io/icon.png</icon>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://spartazhc.github.io/"/>
+  <updated>2020-06-03T13:12:20.000Z</updated>
+  <id>https://spartazhc.github.io/</id>
+  
+  <author>
+    <name>spartazhc</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Next主题字体配置</title>
+    <link href="https://spartazhc.github.io/2020/06/03/Next%E4%B8%BB%E9%A2%98%E5%AD%97%E4%BD%93%E9%85%8D%E7%BD%AE/"/>
+    <id>https://spartazhc.github.io/2020/06/03/Next%E4%B8%BB%E9%A2%98%E5%AD%97%E4%BD%93%E9%85%8D%E7%BD%AE/</id>
+    <published>2020-06-03T13:12:20.000Z</published>
+    <updated>2020-06-03T13:12:20.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;!-- build time:Thu Jun 18 2020 19:18:38 GMT+0800 (China Standard Time) --&gt;&lt;div class=&quot;note default&quot;&gt;&lt;p&gt;我对博客字体的要求是希望能使用思源宋体，实际配置中发现还需要让正文行内的代码部分字体减小的效果。这篇博客记录了我在配置字体的时候学到的一些机制以及踩到的坑。&lt;/p&gt;&lt;/div&gt;
+    
+    </summary>
+    
+    
+      <category term="hexo" scheme="https://spartazhc.github.io/categories/hexo/"/>
+    
+      <category term="next" scheme="https://spartazhc.github.io/categories/hexo/next/"/>
+    
+    
+      <category term="next" scheme="https://spartazhc.github.io/tags/next/"/>
+    
+      <category term="font" scheme="https://spartazhc.github.io/tags/font/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Update hexo-theme-next to latest version(v7.8.0)</title>
+    <link href="https://spartazhc.github.io/2020/06/03/Update-hexo-theme-next-to-latest-version-v7-8-0/"/>
+    <id>https://spartazhc.github.io/2020/06/03/Update-hexo-theme-next-to-latest-version-v7-8-0/</id>
+    <published>2020-06-03T12:17:26.000Z</published>
+    <updated>2020-06-03T12:17:26.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;!-- build time:Thu Jun 18 2020 19:18:38 GMT+0800 (China Standard Time) --&gt;&lt;div class=&quot;note default&quot;&gt;&lt;p&gt;今年寒假在家的时候主力系统从Ubuntu转向了Manjaro，之后就没写过博客，一方面是因为在做毕设之类的，确实没什么产出，另一方面是hexo的环境在Ubuntu上，懒得配过来，这次趁着心血来潮重新配了一下。把hexo和next都更新了，因为next主题有比较大的更新，所以在此记一笔。&lt;/p&gt;&lt;/div&gt;
+    
+    </summary>
+    
+    
+      <category term="hexo" scheme="https://spartazhc.github.io/categories/hexo/"/>
+    
+      <category term="next" scheme="https://spartazhc.github.io/categories/hexo/next/"/>
+    
+    
+      <category term="hexo" scheme="https://spartazhc.github.io/tags/hexo/"/>
+    
+      <category term="next" scheme="https://spartazhc.github.io/tags/next/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Submit Patches to FFmpeg</title>
+    <link href="https://spartazhc.github.io/2020/03/06/Submit-Patches-to-FFmpeg/"/>
+    <id>https://spartazhc.github.io/2020/03/06/Submit-Patches-to-FFmpeg/</id>
+    <published>2020-03-05T17:42:26.000Z</published>
+    <updated>2020-03-05T17:42:26.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;!-- build time:Thu Jun 18 2020 19:18:38 GMT+0800 (China Standard Time) --&gt;&lt;div class=&quot;note default&quot;&gt;&lt;p&gt;想参加今年的GSoC 2020的一个FFmpeg project，需要先做一个Qualification Task: Fix any open bug(s) on trac, get your patch reviewed on ffmpeg-devel@ mailing list. 花了几天解决了一个bug，没几行代码（我太慢了太菜了），然后在提交patch的时候碰到了不少问题。基本上，hwren的博客&lt;a href=&quot;https://www.jianshu.com/p/1f54b144bd5b&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;FFmpeg - 修改提交流程&lt;/a&gt;里面都讲到了，但实际操作中，我还是碰到了一些问题，主要困难在于最后一步&lt;code&gt;git send-email&lt;/code&gt;尝试了很久才成功，另外，邮件列表回复格式也折腾了我好久。&lt;/p&gt;&lt;p&gt;本文包含：1. 如何提交patch; 2. &lt;code&gt;git send-email&lt;/code&gt;配置; 3. 邮件列表回复格式; 4. 一些经验教训&lt;/p&gt;&lt;/div&gt;
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="https://spartazhc.github.io/categories/linux/"/>
+    
+      <category term="tools" scheme="https://spartazhc.github.io/categories/linux/tools/"/>
+    
+    
+      <category term="linux" scheme="https://spartazhc.github.io/tags/linux/"/>
+    
+      <category term="tools" scheme="https://spartazhc.github.io/tags/tools/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Codec Test</title>
+    <link href="https://spartazhc.github.io/2019/12/01/Codec-Test/"/>
+    <id>https://spartazhc.github.io/2019/12/01/Codec-Test/</id>
+    <published>2019-12-01T12:28:44.000Z</published>
+    <updated>2019-12-01T12:28:44.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;!-- build time:Thu Jun 18 2020 19:18:37 GMT+0800 (China Standard Time) --&gt;&lt;div class=&quot;note default&quot;&gt;&lt;p&gt;前几周帮着做了一下x265对比SVT-AV1的测试，以及实验室让测的HM, x265, SVT-HEVC的测试，以下是关于测试方法以及注意点的一些记录。&lt;/p&gt;&lt;/div&gt;
+    
+    </summary>
+    
+    
+      <category term="codec" scheme="https://spartazhc.github.io/categories/codec/"/>
+    
+    
+      <category term="media" scheme="https://spartazhc.github.io/tags/media/"/>
+    
+      <category term="codec" scheme="https://spartazhc.github.io/tags/codec/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Streaming Tech</title>
+    <link href="https://spartazhc.github.io/2019/12/01/Streaming-Tech/"/>
+    <id>https://spartazhc.github.io/2019/12/01/Streaming-Tech/</id>
+    <published>2019-12-01T12:18:28.000Z</published>
+    <updated>2019-12-01T12:18:28.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;!-- build time:Thu Jun 18 2020 19:18:38 GMT+0800 (China Standard Time) --&gt;&lt;div class=&quot;note default&quot;&gt;&lt;p&gt;因为这周在Tech Forum的Presentation，查找了很多关于Streaming的资料，特别是关于协议的选择，还是学到了很多知识的。这篇Blog一部分是当时准备讲稿的留存，另一部分是之后的完善。因为Bitmovin和WOWZA他们的Blog和Report的质量都相当高，所以这篇某种意义上其只是拾人牙慧的收集整理而已。&lt;/p&gt;&lt;/div&gt;
+    
+    </summary>
+    
+    
+      <category term="media" scheme="https://spartazhc.github.io/categories/media/"/>
+    
+    
+      <category term="media" scheme="https://spartazhc.github.io/tags/media/"/>
+    
+      <category term="streaming" scheme="https://spartazhc.github.io/tags/streaming/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Install cgdb from source and configurate it for c++</title>
+    <link href="https://spartazhc.github.io/2019/10/21/Install-cgdb-from-source-and-configurate-it-for-c/"/>
+    <id>https://spartazhc.github.io/2019/10/21/Install-cgdb-from-source-and-configurate-it-for-c/</id>
+    <published>2019-10-21T09:33:54.000Z</published>
+    <updated>2019-10-21T09:33:54.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;!-- build time:Thu Jun 18 2020 19:18:37 GMT+0800 (China Standard Time) --&gt;&lt;div class=&quot;note default&quot;&gt;&lt;p&gt;&lt;a href=&quot;https://cgdb.github.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;cgdb&lt;/a&gt; is a lightweight curses (terminal-based) interface to the GNU Debugger (GDB). In addition to the standard gdb console, cgdb provides a split screen view that displays the source code as it executes. The keyboard interface is modeled after vim, so vim users should feel at home using cgdb.&lt;/p&gt;&lt;p&gt;To use &lt;em&gt;vertical&lt;/em&gt; window split orientation mode in cgdb, I need cgdb version higher than 0.7, so I decided to install cgdb from source.&lt;/p&gt;&lt;/div&gt;
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="https://spartazhc.github.io/categories/linux/"/>
+    
+    
+      <category term="linux" scheme="https://spartazhc.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Netopeer2</title>
+    <link href="https://spartazhc.github.io/2019/09/19/Netopeer2/"/>
+    <id>https://spartazhc.github.io/2019/09/19/Netopeer2/</id>
+    <published>2019-09-19T13:54:49.000Z</published>
+    <updated>2019-09-19T13:54:49.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;!-- build time:Thu Jun 18 2020 19:18:38 GMT+0800 (China Standard Time) --&gt;&lt;div class=&quot;note default&quot;&gt;&lt;p&gt;这篇相对&lt;a href=&quot;/2019/09/19/clixon-backend-restconf/&quot; title=&quot;clixon_backend_restconf&quot;&gt;clixon_backend_restconf&lt;/a&gt;更乱一些，内容从开头的Netopeer2代码阅读到后续的RESTCONF实现细节，差别很大。这篇的有效内容更多，原因是我实现的RESTCONF server和Netopeer2-server用的东西更接近。&lt;/p&gt;&lt;p&gt;同样的，后续可能会把和RESTCONF实现相关的部分再抽离出来。&lt;/p&gt;&lt;/div&gt;
+    
+    </summary>
+    
+    
+      <category term="restconf" scheme="https://spartazhc.github.io/categories/restconf/"/>
+    
+    
+      <category term="restconf" scheme="https://spartazhc.github.io/tags/restconf/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>libyang-doc</title>
+    <link href="https://spartazhc.github.io/2019/09/19/libyang-doc/"/>
+    <id>https://spartazhc.github.io/2019/09/19/libyang-doc/</id>
+    <published>2019-09-19T13:44:38.000Z</published>
+    <updated>2019-09-19T13:44:38.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;!-- build time:Thu Jun 18 2020 19:18:38 GMT+0800 (China Standard Time) --&gt;&lt;div class=&quot;note default&quot;&gt;&lt;p&gt;CESENT公司开源了一套以sysrepo为datastore的网络配置体系。主要有：&lt;code&gt;libyang&lt;/code&gt;, &lt;code&gt;sysrepo&lt;/code&gt;, &lt;code&gt;libnetconf2&lt;/code&gt;, &lt;code&gt;netopeer2&lt;/code&gt;，而且&lt;code&gt;libyang&lt;/code&gt;和&lt;code&gt;sysrepo&lt;/code&gt;是我实现RESTCONF的主要依赖，所以这部分看得比较认真。&lt;/p&gt;&lt;p&gt;但是这篇东西基本上就是&lt;code&gt;libyang&lt;/code&gt;的doc里面的概述部分。&lt;/p&gt;&lt;/div&gt;
+    
+    </summary>
+    
+    
+      <category term="restconf" scheme="https://spartazhc.github.io/categories/restconf/"/>
+    
+    
+      <category term="restconf" scheme="https://spartazhc.github.io/tags/restconf/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>clixon_backend_restconf</title>
+    <link href="https://spartazhc.github.io/2019/09/19/clixon-backend-restconf/"/>
+    <id>https://spartazhc.github.io/2019/09/19/clixon-backend-restconf/</id>
+    <published>2019-09-19T13:31:50.000Z</published>
+    <updated>2019-09-19T13:31:50.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;!-- build time:Thu Jun 18 2020 19:18:38 GMT+0800 (China Standard Time) --&gt;&lt;div class=&quot;note default&quot;&gt;&lt;p&gt;实习期间主要做的就是RESTCONF，Clixon这个项目是我接触的第一个restconf（也是唯一一个）实现，虽然到后来看这个项目只是给我提供了基本框架的思路，但是当时一开始看这个还是挺费劲的。&lt;/p&gt;&lt;p&gt;记录很详尽但是没什么用，后半段有一些RESTCONF实现的调研，可能后续整理资料的时候会再提取出来，这篇记录应该不会再有改动了。&lt;/p&gt;&lt;/div&gt;
+    
+    </summary>
+    
+    
+      <category term="restconf" scheme="https://spartazhc.github.io/categories/restconf/"/>
+    
+    
+      <category term="restconf" scheme="https://spartazhc.github.io/tags/restconf/"/>
+    
+      <category term="network" scheme="https://spartazhc.github.io/tags/network/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Code Complete</title>
+    <link href="https://spartazhc.github.io/2019/09/19/Code-Complete/"/>
+    <id>https://spartazhc.github.io/2019/09/19/Code-Complete/</id>
+    <published>2019-09-19T12:59:07.000Z</published>
+    <updated>2019-09-19T12:59:07.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;!-- build time:Thu Jun 18 2020 19:18:37 GMT+0800 (China Standard Time) --&gt;&lt;div class=&quot;note default&quot;&gt;&lt;p&gt;manager推荐（给另一个实习生）的书，翻了一下感觉还挺好的，这本书的目的就是让你写出&lt;em&gt;后面的代码维护者看了以后不会想打你的代码&lt;/em&gt;。&lt;/p&gt;&lt;p&gt;特别是里面每章结尾的checklist挺不错的，手打了一些感觉有点笨B，更新与否看缘分了。&lt;/p&gt;&lt;/div&gt;
+    
+    </summary>
+    
+    
+      <category term="book" scheme="https://spartazhc.github.io/categories/book/"/>
+    
+    
+      <category term="book" scheme="https://spartazhc.github.io/tags/book/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux network tools</title>
+    <link href="https://spartazhc.github.io/2019/09/19/linux-network-tools/"/>
+    <id>https://spartazhc.github.io/2019/09/19/linux-network-tools/</id>
+    <published>2019-09-19T12:58:21.000Z</published>
+    <updated>2019-09-19T12:58:21.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;!-- build time:Thu Jun 18 2020 19:18:38 GMT+0800 (China Standard Time) --&gt;&lt;div class=&quot;note default&quot;&gt;&lt;p&gt;某天摸鱼的时候在看&lt;a href=&quot;https://tonydeng.github.io/sdn-handbook/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;sdn-handbook&lt;/a&gt;，然后尝试了一下里面提到的网络工具，做了简要的汇总。（感觉是最近完成度最高的一篇了，虽然也是逐渐偷工减料）&lt;/p&gt;&lt;/div&gt;
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="https://spartazhc.github.io/categories/linux/"/>
+    
+      <category term="tools" scheme="https://spartazhc.github.io/categories/linux/tools/"/>
+    
+      <category term="network" scheme="https://spartazhc.github.io/categories/network/"/>
+    
+      <category term="tools" scheme="https://spartazhc.github.io/categories/network/tools/"/>
+    
+    
+      <category term="linux" scheme="https://spartazhc.github.io/tags/linux/"/>
+    
+      <category term="tools" scheme="https://spartazhc.github.io/tags/tools/"/>
+    
+      <category term="network" scheme="https://spartazhc.github.io/tags/network/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>正则表达式</title>
+    <link href="https://spartazhc.github.io/2019/09/19/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    <id>https://spartazhc.github.io/2019/09/19/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</id>
+    <published>2019-09-19T12:57:52.000Z</published>
+    <updated>2019-09-19T12:57:52.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;!-- build time:Thu Jun 18 2020 19:18:38 GMT+0800 (China Standard Time) --&gt;&lt;div class=&quot;note default&quot;&gt;&lt;p&gt;一开始看这个的原因是udpi里面用到了hyperscan，所以看得hyperscan。杂七杂八看了挺多的，记录下来的不多。能否完善也要看缘分了。&lt;/p&gt;&lt;p&gt;对正则表达式挺感兴趣的，可能之后会再看怎么写正则表达式。（这篇东西等于啥也没有）&lt;/p&gt;&lt;/div&gt;
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="https://spartazhc.github.io/categories/linux/"/>
+    
+    
+      <category term="regrex" scheme="https://spartazhc.github.io/tags/regrex/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vim-plugins</title>
+    <link href="https://spartazhc.github.io/2019/09/19/vim-plugins/"/>
+    <id>https://spartazhc.github.io/2019/09/19/vim-plugins/</id>
+    <published>2019-09-19T12:33:52.000Z</published>
+    <updated>2019-09-19T12:33:52.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;!-- build time:Thu Jun 18 2020 19:18:38 GMT+0800 (China Standard Time) --&gt;&lt;div class=&quot;note default&quot;&gt;&lt;p&gt;一直想配一套自己的vim配置。前段时间摸鱼的时候配了一点，这里会以记录我使用的插件为主，也会顺便记点别的。&lt;/p&gt;&lt;/div&gt;
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="https://spartazhc.github.io/categories/linux/"/>
+    
+      <category term="tools" scheme="https://spartazhc.github.io/categories/linux/tools/"/>
+    
+    
+      <category term="vim" scheme="https://spartazhc.github.io/tags/vim/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>VPP-startup</title>
+    <link href="https://spartazhc.github.io/2019/09/19/VPP-startup/"/>
+    <id>https://spartazhc.github.io/2019/09/19/VPP-startup/</id>
+    <published>2019-09-19T12:32:26.000Z</published>
+    <updated>2019-09-19T12:32:26.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;!-- build time:Thu Jun 18 2020 19:18:38 GMT+0800 (China Standard Time) --&gt;&lt;div class=&quot;note default&quot;&gt;&lt;p&gt;实习在intel NCLG package process，menter这边主要是做fdio项目里面的，VPP多少涉及一些，前几天想跑一下sweetcomb，终于整了一次VPP。&lt;/p&gt;&lt;/div&gt;
+    
+    </summary>
+    
+    
+      <category term="network" scheme="https://spartazhc.github.io/categories/network/"/>
+    
+    
+      <category term="network" scheme="https://spartazhc.github.io/tags/network/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>电影命名简析与pt扫盲</title>
+    <link href="https://spartazhc.github.io/2019/09/19/%E7%94%B5%E5%BD%B1%E5%91%BD%E5%90%8D%E7%AE%80%E6%9E%90%E4%B8%8Ept%E6%89%AB%E7%9B%B2/"/>
+    <id>https://spartazhc.github.io/2019/09/19/%E7%94%B5%E5%BD%B1%E5%91%BD%E5%90%8D%E7%AE%80%E6%9E%90%E4%B8%8Ept%E6%89%AB%E7%9B%B2/</id>
+    <published>2019-09-19T12:27:12.000Z</published>
+    <updated>2019-09-19T12:27:12.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;!-- build time:Thu Jun 18 2020 19:18:38 GMT+0800 (China Standard Time) --&gt;&lt;div class=&quot;note default&quot;&gt;&lt;p&gt;是一时兴起打算投电影社的推送才写的，但是写到一半就咕咕了，所以现在剩下的只有前半：&lt;em&gt;电影命名简析&lt;/em&gt; （其实叫&lt;em&gt;视频资源命名解析&lt;/em&gt;或许更加妥当。）&lt;/p&gt;&lt;p&gt;剩下一半就看缘分了～&lt;/p&gt;&lt;/div&gt;
+    
+    </summary>
+    
+    
+      <category term="media" scheme="https://spartazhc.github.io/categories/media/"/>
+    
+    
+      <category term="pt" scheme="https://spartazhc.github.io/tags/pt/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Haskell</title>
+    <link href="https://spartazhc.github.io/2019/09/19/Haskell/"/>
+    <id>https://spartazhc.github.io/2019/09/19/Haskell/</id>
+    <published>2019-09-19T12:14:50.000Z</published>
+    <updated>2019-09-19T12:14:50.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;!-- build time:Thu Jun 18 2020 19:18:38 GMT+0800 (China Standard Time) --&gt;&lt;div class=&quot;note default&quot;&gt;&lt;p&gt;一直挺想看看Haskell的函数式编程是怎么样的，所以开始学，但是最近实习+毕设可能稍微忙一些，而且发现自己之前的记录方式太繁复了，可能会把那个网页的大半都拷下来，思考要不要做这么笨B的事了。&lt;/p&gt;&lt;/div&gt;
+    
+    </summary>
+    
+    
+      <category term="haskell" scheme="https://spartazhc.github.io/categories/haskell/"/>
+    
+    
+      <category term="haskell" scheme="https://spartazhc.github.io/tags/haskell/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>v2ray setup</title>
+    <link href="https://spartazhc.github.io/2019/09/19/v2ray-setup/"/>
+    <id>https://spartazhc.github.io/2019/09/19/v2ray-setup/</id>
+    <published>2019-09-19T12:11:25.000Z</published>
+    <updated>2019-09-19T12:11:25.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;!-- build time:Thu Jun 18 2020 19:18:38 GMT+0800 (China Standard Time) --&gt;&lt;div class=&quot;note default&quot;&gt;&lt;p&gt;国庆前夕又严打啊，原来的代理挂了，正好尝试一下v2ray。&lt;/p&gt;&lt;/div&gt;
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="https://spartazhc.github.io/categories/linux/"/>
+    
+    
+      <category term="linux" scheme="https://spartazhc.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>pytorch环境</title>
+    <link href="https://spartazhc.github.io/2019/09/19/pytorch%E7%8E%AF%E5%A2%83/"/>
+    <id>https://spartazhc.github.io/2019/09/19/pytorch%E7%8E%AF%E5%A2%83/</id>
+    <published>2019-09-19T12:08:06.000Z</published>
+    <updated>2019-09-19T12:08:06.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;!-- build time:Thu Jun 18 2020 19:18:38 GMT+0800 (China Standard Time) --&gt;&lt;div class=&quot;note default&quot;&gt;&lt;p&gt;其实是virtualenv环境。&lt;/p&gt;&lt;p&gt;选择virtualenv的理由：conda有些包没有，用这个更加原生一点（很喜欢requirement.txt的方式）。而且conda真不好用。&lt;/p&gt;&lt;/div&gt;
+    
+    </summary>
+    
+    
+      <category term="AI" scheme="https://spartazhc.github.io/categories/AI/"/>
+    
+    
+      <category term="AI" scheme="https://spartazhc.github.io/tags/AI/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Ubuntu16.04安装后要做几件事</title>
+    <link href="https://spartazhc.github.io/2019/07/08/Ubuntu16-04%E5%AE%89%E8%A3%85%E5%90%8E%E8%A6%81%E5%81%9A%E5%87%A0%E4%BB%B6%E4%BA%8B/"/>
+    <id>https://spartazhc.github.io/2019/07/08/Ubuntu16-04%E5%AE%89%E8%A3%85%E5%90%8E%E8%A6%81%E5%81%9A%E5%87%A0%E4%BB%B6%E4%BA%8B/</id>
+    <published>2019-07-08T06:02:30.000Z</published>
+    <updated>2019-07-08T06:02:30.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;!-- build time:Thu Jun 18 2020 19:18:38 GMT+0800 (China Standard Time) --&gt;&lt;div class=&quot;note default&quot;&gt;&lt;p&gt;写于实习期间装系统后配置环境的时候，迅速弃坑！（有空想到了慢慢补吧）&lt;/p&gt;&lt;/div&gt;
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="https://spartazhc.github.io/categories/linux/"/>
+    
+      <category term="环境" scheme="https://spartazhc.github.io/categories/linux/%E7%8E%AF%E5%A2%83/"/>
+    
+    
+      <category term="linux" scheme="https://spartazhc.github.io/tags/linux/"/>
+    
+      <category term="ubuntu" scheme="https://spartazhc.github.io/tags/ubuntu/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Multimedia lab2 freeswitch</title>
+    <link href="https://spartazhc.github.io/2019/05/20/Multimedia%20lab2%20freeswitch/"/>
+    <id>https://spartazhc.github.io/2019/05/20/Multimedia%20lab2%20freeswitch/</id>
+    <published>2019-05-20T15:31:18.000Z</published>
+    <updated>2019-05-20T15:31:18.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;!-- build time:Thu Jun 18 2020 19:18:38 GMT+0800 (China Standard Time) --&gt;&lt;div class=&quot;note default&quot;&gt;&lt;p&gt;Multimedia的lab2报告，主要是FreeSWITCH的使用。（再次为删掉了自己lab1的报告而暴哭！）&lt;/p&gt;&lt;/div&gt;
+    
+    </summary>
+    
+    
+      <category term="media" scheme="https://spartazhc.github.io/categories/media/"/>
+    
+    
+      <category term="media" scheme="https://spartazhc.github.io/tags/media/"/>
+    
+  </entry>
+  
+</feed>
