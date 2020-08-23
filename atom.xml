@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://spartazhc.github.io/"/>
-  <updated>2020-06-03T13:12:20.000Z</updated>
+  <updated>2020-08-23T11:52:45.000Z</updated>
   <id>https://spartazhc.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ABR meets FFmpeg, in detail</title>
+    <link href="https://spartazhc.github.io/2020/08/23/ABR-meets-FFmpeg-in-detail/"/>
+    <id>https://spartazhc.github.io/2020/08/23/ABR-meets-FFmpeg-in-detail/</id>
+    <published>2020-08-23T11:52:45.000Z</published>
+    <updated>2020-08-23T11:52:45.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;!-- build time:Sun Aug 23 2020 20:11:00 GMT+0800 (China Standard Time) --&gt;&lt;div class=&quot;note default&quot;&gt;&lt;p&gt;I participated in GSoC 2020, my project is “ABR meets FFmpeg” which aim to add an ABR module to FFmpeg. Here I will talk about my project in detail.&lt;/p&gt;&lt;/div&gt;
+    
+    </summary>
+    
+    
+      <category term="FFmpeg" scheme="https://spartazhc.github.io/categories/FFmpeg/"/>
+    
+    
+      <category term="FFmpeg" scheme="https://spartazhc.github.io/tags/FFmpeg/"/>
+    
+      <category term="GSoC" scheme="https://spartazhc.github.io/tags/GSoC/"/>
+    
+  </entry>
   
   <entry>
     <title>Next主题字体配置</title>
@@ -75,7 +98,7 @@
     
     <summary type="html">
     
-      &lt;!-- build time:Thu Jun 18 2020 19:18:38 GMT+0800 (China Standard Time) --&gt;&lt;div class=&quot;note default&quot;&gt;&lt;p&gt;想参加今年的GSoC 2020的一个FFmpeg project，需要先做一个Qualification Task: Fix any open bug(s) on trac, get your patch reviewed on ffmpeg-devel@ mailing list. 花了几天解决了一个bug，没几行代码（我太慢了太菜了），然后在提交patch的时候碰到了不少问题。基本上，hwren的博客&lt;a href=&quot;https://www.jianshu.com/p/1f54b144bd5b&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;FFmpeg - 修改提交流程&lt;/a&gt;里面都讲到了，但实际操作中，我还是碰到了一些问题，主要困难在于最后一步&lt;code&gt;git send-email&lt;/code&gt;尝试了很久才成功，另外，邮件列表回复格式也折腾了我好久。&lt;/p&gt;&lt;p&gt;本文包含：1. 如何提交patch; 2. &lt;code&gt;git send-email&lt;/code&gt;配置; 3. 邮件列表回复格式; 4. 一些经验教训&lt;/p&gt;&lt;/div&gt;
+      &lt;!-- build time:Sun Aug 23 2020 19:58:22 GMT+0800 (China Standard Time) --&gt;&lt;div class=&quot;note default&quot;&gt;&lt;p&gt;想参加今年的GSoC 2020的一个FFmpeg project，需要先做一个Qualification Task: Fix any open bug(s) on trac, get your patch reviewed on ffmpeg-devel@ mailing list. 花了几天解决了一个bug，没几行代码（我太慢了太菜了），然后在提交patch的时候碰到了不少问题。基本上，hwren的博客&lt;a href=&quot;https://www.jianshu.com/p/1f54b144bd5b&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;FFmpeg - 修改提交流程&lt;/a&gt;里面都讲到了，但实际操作中，我还是碰到了一些问题，主要困难在于最后一步&lt;code&gt;git send-email&lt;/code&gt;尝试了很久才成功，另外，邮件列表回复格式也折腾了我好久。&lt;/p&gt;&lt;p&gt;本文包含：1. 如何提交patch; 2. &lt;code&gt;git send-email&lt;/code&gt;配置; 3. 邮件列表回复格式; 4. 一些经验教训&lt;/p&gt;&lt;/div&gt;
     
     </summary>
     
@@ -446,27 +469,6 @@
       <category term="linux" scheme="https://spartazhc.github.io/tags/linux/"/>
     
       <category term="ubuntu" scheme="https://spartazhc.github.io/tags/ubuntu/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Multimedia lab2 freeswitch</title>
-    <link href="https://spartazhc.github.io/2019/05/20/Multimedia%20lab2%20freeswitch/"/>
-    <id>https://spartazhc.github.io/2019/05/20/Multimedia%20lab2%20freeswitch/</id>
-    <published>2019-05-20T15:31:18.000Z</published>
-    <updated>2019-05-20T15:31:18.000Z</updated>
-    
-    <summary type="html">
-    
-      &lt;!-- build time:Thu Jun 18 2020 19:18:38 GMT+0800 (China Standard Time) --&gt;&lt;div class=&quot;note default&quot;&gt;&lt;p&gt;Multimedia的lab2报告，主要是FreeSWITCH的使用。（再次为删掉了自己lab1的报告而暴哭！）&lt;/p&gt;&lt;/div&gt;
-    
-    </summary>
-    
-    
-      <category term="media" scheme="https://spartazhc.github.io/categories/media/"/>
-    
-    
-      <category term="media" scheme="https://spartazhc.github.io/tags/media/"/>
     
   </entry>
   
